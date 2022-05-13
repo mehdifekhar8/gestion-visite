@@ -1,0 +1,39 @@
+{
+  "en": {
+    "management": {
+      "visits": {
+        "fields": {
+          "_id": "ID",
+          "isDeleted": "isDeleted",
+          "isDeleted_description": "This field is used to identify if this object has been soft-deleted",
+          "createdAt": "Created At",
+          "createdAt_description": "Represents the date when this object was created",
+          "updatedAt": "Updated At",
+          "updatedAt_description": "Represents the last time when the object was updated",
+          "information": "Information",
+          "doctorId": "doctorId",
+          "doctor": "Doctor"
+        },
+        "menu": {
+          "title": "Visits"
+        },
+        "list": {
+          "header": "Visits List",
+          "create_btn": "New Visit"
+        },
+        "create": {
+          "header": "Create Visit"
+        },
+        "edit": {
+          "header": "Edit Visit"
+        },
+        "view": {
+          "header": "View Visit"
+        },
+        "delete_confirmation": "You have deleted the Visit",
+        "create_confirmation": "You successfully added a new Visit",
+        "edit_confirmation": "You successfully edited the Visit"
+      }
+    }
+  }
+}
