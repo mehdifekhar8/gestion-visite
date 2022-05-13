@@ -16,5 +16,7 @@ export default /* GraphQL */ `
     Represents the last time when the object was updated
     """
     updatedAt: Date!
+    usersList: [User]!
+    usersListIds: [ObjectId]!
   }
 `;

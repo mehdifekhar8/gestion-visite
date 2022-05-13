@@ -39,4 +39,9 @@ export class Region {
    */
   @Is(a.date().required())
   updatedAt: Date;
+
+  usersList: User[] = [];
+
+  @Is(an.array().of(an.objectId()).required())
+  usersListIds: ObjectId[] = [];
 }

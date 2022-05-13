@@ -489,18 +489,22 @@ export type Region = {
   superVisorId: Scalars['ObjectId'];
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
+  usersList: Array<Maybe<User>>;
+  usersListIds: Array<Maybe<Scalars['ObjectId']>>;
 };
 
 export type RegionInsertInput = {
   name: Scalars['String'];
   statesListIds: Array<Maybe<Scalars['ObjectId']>>;
   superVisorId: Scalars['ObjectId'];
+  usersListIds: Array<Maybe<Scalars['ObjectId']>>;
 };
 
 export type RegionUpdateInput = {
   name?: Maybe<Scalars['String']>;
   statesListIds?: Maybe<Array<Maybe<Scalars['ObjectId']>>>;
   superVisorId?: Maybe<Scalars['ObjectId']>;
+  usersListIds?: Maybe<Array<Maybe<Scalars['ObjectId']>>>;
 };
 
 export type RegistrationInput = {
