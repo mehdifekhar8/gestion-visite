@@ -30,5 +30,11 @@ export const Regions = collection({
       representedBy: "state",
       isMany:true,
     }),
+    relation({
+      id: "usersList",
+      to: "Users",
+      representedBy: "fullName",
+      isMany:true,
+    }),
   ],
 });

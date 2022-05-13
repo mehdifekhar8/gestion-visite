@@ -63,6 +63,23 @@ export class RegionCreateForm extends XForm {
           </Ant.Form.Item>
         ),
       },
+
+      {
+        id: "usersListIds",
+        label: t("management.regions.fields.usersList"),
+        name: ["usersListIds"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={UsersCollection}
+              field="fullName"
+              required={true}
+              mode="multiple"
+            />
+          </Ant.Form.Item>
+        ),
+      },
     ]);
   }
 
