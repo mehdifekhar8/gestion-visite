@@ -14,6 +14,7 @@
     "generate:types:win32": "cd microservices/admin && npm run generate"
   },
   "dependencies": {
+    "google-map-react": "^2.1.10",
     "google-maps-api-loader": "^1.1.1",
     "react-google-map-picker": "^1.2.3"
   },

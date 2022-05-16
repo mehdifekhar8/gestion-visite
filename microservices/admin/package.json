@@ -25,6 +25,7 @@
     "@bluelibs/smart": "^1.0.0",
     "@bluelibs/x-ui": "^1.0.0",
     "@bluelibs/x-ui-admin": "^1.0.0",
+    "@react-google-maps/api": "^2.10.2",
     "antd": "^4.12.3",
     "apollo-upload-client": "^16.0.0",
     "dotenv": "^8.6.0",
