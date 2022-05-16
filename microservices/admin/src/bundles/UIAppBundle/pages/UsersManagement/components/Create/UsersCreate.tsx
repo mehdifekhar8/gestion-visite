@@ -1,15 +1,11 @@
-import { Routes } from "@bundles/UIAppBundle";
-import { useUIComponents, useRouter, use, useTranslate } from "@bluelibs/x-ui";
+import { useUIComponents, use, useTranslate, useRouter } from "@bluelibs/x-ui";
 import * as Ant from "antd";
 import { UserCreateForm } from "../../config/UserCreateForm";
-import { User, UsersCollection } from "@bundles/UIAppBundle/collections";
-import { gql, useMutation } from "@apollo/client";
-
-const UserRegistration = gql`
-  mutation Mutation($document: UserRegistrationInput!) {
-    UserRegistration(document: $document)
-  }
-`;
+import { useMutation } from "@apollo/client";
+import { UserRegistration } from "../../mutations/UserRegistration";
+import { UserRegistrationInput } from "@root/api.types";
+import { SmileOutlined } from "@ant-design/icons";
+import { Routes } from "@bundles/UIAppBundle";
 
 const formLayout = {
   labelCol: { span: 8 },
@@ -22,6 +18,7 @@ const formTailLayout = {
 
 export function UsersCreate() {
   const [userRegistration] = useMutation(UserRegistration);
+  const router = useRouter();
 
   const UIComponents = useUIComponents();
   const t = useTranslate();
@@ -39,8 +36,27 @@ export function UsersCreate() {
           {...formLayout}
           requiredMark="optional"
           onFinish={(document) => {
-            userRegistration({variables: { document },});
-            console.log("ok");
+            userRegistration({
+              variables: { document },
+            })
+              .then((data) => {
+                Ant.notification.success({
+                  message: t("generics.success"),
+                  description: t("management.users.create_confirmation"),
+                  icon: <SmileOutlined />,
+                });
+                router.go(Routes.USERS_VIEW, {
+                  params: {
+                    id: data.data.UserRegistration,
+                  },
+                });
+              })
+              .catch((err) => {
+                Ant.notification.warn({
+                  message: t("generics.error"),
+                  description: t("generics.error_message"),
+                });
+              });
           }}
         >
           {form.render()}

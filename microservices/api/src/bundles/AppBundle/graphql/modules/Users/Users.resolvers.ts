@@ -117,7 +117,7 @@ export default {
           await collection.updateOne(
             { _id: userId },
             {
-              $set: { roles: [UserRole.DELEGATE] , createdById:ctx.userId  },
+              $set: { roles: args.document.roles, createdById: ctx.userId },
             }
           );
           return userId;

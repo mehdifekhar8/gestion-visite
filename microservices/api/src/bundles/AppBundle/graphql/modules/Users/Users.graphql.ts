@@ -7,7 +7,7 @@ export default /* GraphQL */ `
 
   type Mutation {
     UsersInsertOne(document: UserInsertInput!): User
-    UserRegistration(document: UserRegistrationInput!): ObjectId !
+    UserRegistration(document: UserRegistrationInput!): ObjectId
     UsersUpdateOne(_id: ObjectId!, document: UserUpdateInput!): User!
     UsersDeleteOne(_id: ObjectId!): Boolean
   }
