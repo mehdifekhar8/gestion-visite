@@ -180,7 +180,7 @@ export type Mutation = {
   AppFileUploadToGroup?: Maybe<AppFile>;
   AppFileUpload?: Maybe<AppFile>;
   UsersInsertOne?: Maybe<User>;
-  UserRegistration: Scalars['ObjectId'];
+  UserRegistration?: Maybe<Scalars['ObjectId']>;
   UsersUpdateOne: User;
   UsersDeleteOne?: Maybe<Scalars['Boolean']>;
   VisitsInsertOne?: Maybe<Visit>;

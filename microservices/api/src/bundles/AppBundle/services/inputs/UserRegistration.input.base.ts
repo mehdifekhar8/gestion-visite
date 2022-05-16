@@ -1,5 +1,6 @@
 /** overridable */
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
+import { UserRole } from "@bundles/AppBundle/collections/Users";
 
 @Schema()
 export class UserProfileInput {
@@ -22,4 +23,11 @@ export class UserRegistrationInput {
   @Is(a.string().nullable())
   password?: string;
 
+  @Is(
+    an
+      .array()
+      .of(a.string().oneOf(Object.values(UserRole).concat(null)))
+      .required()
+  )
+  roles: UserRole[] = [];
 }
