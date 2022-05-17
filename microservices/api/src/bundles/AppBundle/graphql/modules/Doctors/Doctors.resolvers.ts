@@ -19,6 +19,7 @@ export default {
         X.ToModel(DoctorInsertInput, { field: "document" }),
         X.Validate({ field: "document" }),
         X.ToDocumentInsert(DoctorsCollection),
+       
         X.ToNovaByResultID(DoctorsCollection),
       ],
       DoctorsUpdateOne: [
