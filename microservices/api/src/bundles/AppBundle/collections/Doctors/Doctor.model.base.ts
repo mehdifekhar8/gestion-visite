@@ -6,11 +6,11 @@ import { Region } from "../";
 
 @Schema()
 export class DoctorCoordinates {
-  @Is(a.string().required())
-  lat: string;
+  @Is(a.number().required())
+  lat: number;
 
-  @Is(a.string().required())
-  lng: string;
+  @Is(a.number().required())
+  lng: number;
 }
 @Schema()
 export class DoctorProfile {
@@ -63,10 +63,10 @@ export class Doctor {
   @Is(() => Schema.from(DoctorProfile))
   profile: DoctorProfile;
 
-  region: Region;
+  region?: Region;
 
-  @Is(an.objectId().required())
-  regionId: ObjectId;
+  @Is(an.objectId().nullable())
+  regionId?: ObjectId;
 
   /**
    * @description Represents the last time when the object was updated

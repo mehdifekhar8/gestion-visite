@@ -33,7 +33,7 @@ export class DoctorEditForm extends XForm {
             label: t("management.doctors.fields.coordinates.lat"),
             name: ["coordinates", "lat"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
 
           {
@@ -41,7 +41,7 @@ export class DoctorEditForm extends XForm {
             label: t("management.doctors.fields.coordinates.lng"),
             name: ["coordinates", "lng"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
         ],
       },
@@ -101,13 +101,12 @@ export class DoctorEditForm extends XForm {
         id: "regionId",
         label: t("management.doctors.fields.region"),
         name: ["regionId"],
-        required: true,
         render: (props) => (
           <Ant.Form.Item {...props}>
             <UIComponents.RemoteSelect
               collectionClass={RegionsCollection}
               field="name"
-              required={true}
+              required={false}
             />
           </Ant.Form.Item>
         ),

@@ -16,11 +16,12 @@ export const Doctors = collection({
     field({
       id: "fullName",
       type: field.types.STRING,
-      isReducer:true
+      isReducer: true,
     }),
     field({
       id: "phone",
       type: field.types.STRING,
+      isReducer:false
     }),
     field({
       id: "coordinates",
@@ -28,11 +29,11 @@ export const Doctors = collection({
       subfields: [
         field({
           id: "lat",
-          type: field.types.STRING,
+          type: field.types.FLOAT,
         }),
         field({
           id: "lng",
-          type: field.types.STRING,
+          type: field.types.FLOAT,
         }),
       ],
     }),
@@ -43,6 +44,7 @@ export const Doctors = collection({
       id: "region",
       to: "Regions",
       representedBy: "name",
+      isRequired: false,
     }),
   ],
 });

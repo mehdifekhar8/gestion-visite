@@ -19,7 +19,7 @@ export class DoctorViewer extends XViewer {
         dataIndex: ["coordinates", "lat"],
         render: (value) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -31,7 +31,7 @@ export class DoctorViewer extends XViewer {
         dataIndex: ["coordinates", "lng"],
         render: (value) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;

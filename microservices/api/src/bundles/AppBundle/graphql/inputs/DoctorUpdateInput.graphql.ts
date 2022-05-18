@@ -8,8 +8,8 @@ export default /* GraphQL */ `
   }
 
   input DoctorCoordinatesInput {
-    lat: String!
-    lng: String!
+    lat: Float!
+    lng: Float!
   }
   input DoctorProfileInput {
     firstName: String!

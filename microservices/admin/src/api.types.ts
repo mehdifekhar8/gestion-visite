@@ -93,8 +93,8 @@ export type Doctor = {
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfile;
-  region: Region;
-  regionId: Scalars['ObjectId'];
+  region?: Maybe<Region>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
   /** Represents the user who has made the latest update on this object */
@@ -105,22 +105,21 @@ export type Doctor = {
 
 export type DoctorCoordinates = {
   __typename?: 'DoctorCoordinates';
-  lat: Scalars['String'];
-  lng: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
 };
 
 export type DoctorCoordinatesInput = {
-  lat: Scalars['String'];
-  lng: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
 };
 
 export type DoctorInsertInput = {
   coordinates: DoctorCoordinatesInput;
-  fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfileInput;
-  regionId: Scalars['ObjectId'];
+  regionId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type DoctorProfile = {
@@ -136,7 +135,6 @@ export type DoctorProfileInput = {
 
 export type DoctorUpdateInput = {
   coordinates?: Maybe<DoctorCoordinatesInput>;
-  fullName?: Maybe<Scalars['String']>;
   isEnabled?: Maybe<Scalars['Boolean']>;
   phone?: Maybe<Scalars['String']>;
   profile?: Maybe<DoctorProfileInput>;

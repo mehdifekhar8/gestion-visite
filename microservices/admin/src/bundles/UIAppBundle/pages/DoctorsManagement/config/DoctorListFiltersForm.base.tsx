@@ -29,7 +29,7 @@ export class DoctorListFiltersForm extends XForm {
             label: t("management.doctors.fields.coordinates.lat"),
             name: ["coordinates", "lat"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
 
           {
@@ -37,7 +37,7 @@ export class DoctorListFiltersForm extends XForm {
             label: t("management.doctors.fields.coordinates.lng"),
             name: ["coordinates", "lng"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
         ],
       },
