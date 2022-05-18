@@ -20,6 +20,9 @@ export class UserUpdateInput {
   @Is(() => Schema.from(UserProfileInput).nullable())
   profile?: UserProfileInput;
 
+  @Is(an.objectId().nullable())
+  regionId?: ObjectId;
+
   @Is(an.array().of(a.string().oneOf(Object.values(UserRole).concat(null))))
   roles?: UserRole[] = [];
 }

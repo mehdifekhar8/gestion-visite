@@ -24,9 +24,6 @@ export class DoctorInsertInput {
   @Is(() => Schema.from(DoctorCoordinatesInput))
   coordinates: DoctorCoordinatesInput;
 
-  @Is(a.string().required())
-  fullName: string;
-
   @Is(a.boolean().required())
   isEnabled: boolean;
 
@@ -35,4 +32,7 @@ export class DoctorInsertInput {
 
   @Is(() => Schema.from(DoctorProfileInput))
   profile: DoctorProfileInput;
+
+  @Is(an.objectId().required())
+  regionId: ObjectId;
 }

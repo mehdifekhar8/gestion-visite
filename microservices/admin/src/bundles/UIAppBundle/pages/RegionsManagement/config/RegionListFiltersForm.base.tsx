@@ -84,22 +84,6 @@ export class RegionListFiltersForm extends XForm {
           </Ant.Form.Item>
         ),
       },
-
-      {
-        id: "usersListIds",
-        label: t("management.regions.fields.usersList"),
-        name: ["usersListIds"],
-        render: (props) => (
-          <Ant.Form.Item {...props}>
-            <UIComponents.RemoteSelect
-              collectionClass={UsersCollection}
-              field="fullName"
-              placeholder="Please select an option"
-              mode="multiple"
-            />
-          </Ant.Form.Item>
-        ),
-      },
     ]);
   }
 }

@@ -93,6 +93,8 @@ export type Doctor = {
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfile;
+  region: Region;
+  regionId: Scalars['ObjectId'];
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
   /** Represents the user who has made the latest update on this object */
@@ -118,6 +120,7 @@ export type DoctorInsertInput = {
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfileInput;
+  regionId: Scalars['ObjectId'];
 };
 
 export type DoctorProfile = {
@@ -137,6 +140,7 @@ export type DoctorUpdateInput = {
   isEnabled?: Maybe<Scalars['Boolean']>;
   phone?: Maybe<Scalars['String']>;
   profile?: Maybe<DoctorProfileInput>;
+  regionId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type DocumentUpdateInput = {
@@ -490,21 +494,18 @@ export type Region = {
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
   usersList: Array<Maybe<User>>;
-  usersListIds: Array<Maybe<Scalars['ObjectId']>>;
 };
 
 export type RegionInsertInput = {
   name: Scalars['String'];
   statesListIds: Array<Maybe<Scalars['ObjectId']>>;
   superVisorId: Scalars['ObjectId'];
-  usersListIds: Array<Maybe<Scalars['ObjectId']>>;
 };
 
 export type RegionUpdateInput = {
   name?: Maybe<Scalars['String']>;
   statesListIds?: Maybe<Array<Maybe<Scalars['ObjectId']>>>;
   superVisorId?: Maybe<Scalars['ObjectId']>;
-  usersListIds?: Maybe<Array<Maybe<Scalars['ObjectId']>>>;
 };
 
 export type RegistrationInput = {
@@ -641,6 +642,8 @@ export type User = {
   fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   profile: UserProfile;
+  region?: Maybe<Region>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles: Array<Maybe<UserRole>>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
@@ -653,6 +656,7 @@ export type User = {
 export type UserInsertInput = {
   isEnabled: Scalars['Boolean'];
   profile: UserProfileInput;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles: Array<Maybe<UserRole>>;
 };
 
@@ -683,6 +687,7 @@ export enum UserRole {
 export type UserUpdateInput = {
   isEnabled?: Maybe<Scalars['Boolean']>;
   profile?: Maybe<UserProfileInput>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles?: Maybe<Array<Maybe<UserRole>>>;
 };
 

@@ -4,7 +4,7 @@ import {
   CollectionTransformMap,
 } from "@bluelibs/x-ui";
 import { User } from "@root/api.types";
-import {} from "@bundles/UIAppBundle/collections";
+import { RegionsCollection } from "@bundles/UIAppBundle/collections";
 import { ObjectId } from "@bluelibs/ejson";
 
 export type { User };
@@ -33,6 +33,11 @@ export class UsersCollection extends Collection<User> {
         collection: () => UsersCollection,
         name: "updatedBy",
         field: "updatedById",
+      },
+      {
+        collection: () => RegionsCollection,
+        name: "region",
+        field: "regionId",
       },
     ];
   }

@@ -162,7 +162,6 @@ export class RegionViewer extends XViewer {
         _id: 1,
         fullName: 1,
       },
-      usersListIds: 1,
     };
   }
 }

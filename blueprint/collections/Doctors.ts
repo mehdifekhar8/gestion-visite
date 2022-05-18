@@ -1,4 +1,4 @@
-import { collection, field, shortcuts } from "../utils";
+import { collection, field, relation, shortcuts } from "../utils";
 
 export const Doctors = collection({
   id: "Doctors",
@@ -16,6 +16,7 @@ export const Doctors = collection({
     field({
       id: "fullName",
       type: field.types.STRING,
+      isReducer:true
     }),
     field({
       id: "phone",
@@ -36,5 +37,12 @@ export const Doctors = collection({
       ],
     }),
   ],
-  relations: [...shortcuts.relations.blameable()],
+  relations: [
+    ...shortcuts.relations.blameable(),
+    relation({
+      id: "region",
+      to: "Regions",
+      representedBy: "name",
+    }),
+  ],
 });

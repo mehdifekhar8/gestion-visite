@@ -177,7 +177,6 @@ export class RegionList extends XList<Region> {
         _id: 1,
         fullName: 1,
       },
-      usersListIds: 1,
     };
   }
 }

@@ -19,5 +19,5 @@ export const statesList: IBundleLinkCollectionOption = {
 export const usersList: IBundleLinkCollectionOption = {
   collection: () => UsersCollection,
   many: true,
-  field: "usersListIds",
+  inversedBy: "region",
 };

@@ -3,6 +3,5 @@ export default /* GraphQL */ `
     name: String
     statesListIds: [ObjectId]
     superVisorId: ObjectId
-    usersListIds: [ObjectId]
   }
 `;

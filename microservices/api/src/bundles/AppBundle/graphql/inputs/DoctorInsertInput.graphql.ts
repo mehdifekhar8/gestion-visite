@@ -1,10 +1,10 @@
 export default /* GraphQL */ `
   input DoctorInsertInput {
     coordinates: DoctorCoordinatesInput!
-    fullName: String!
     isEnabled: Boolean!
     phone: String!
     profile: DoctorProfileInput!
+    regionId: ObjectId!
   }
 
   input DoctorCoordinatesInput {
