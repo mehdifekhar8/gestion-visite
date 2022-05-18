@@ -62,23 +62,6 @@ export class RegionEditForm extends XForm {
           </Ant.Form.Item>
         ),
       },
-
-      {
-        id: "usersListIds",
-        label: t("management.regions.fields.usersList"),
-        name: ["usersListIds"],
-        required: true,
-        render: (props) => (
-          <Ant.Form.Item {...props}>
-            <UIComponents.RemoteSelect
-              collectionClass={UsersCollection}
-              field="fullName"
-              required={true}
-              mode="multiple"
-            />
-          </Ant.Form.Item>
-        ),
-      },
     ]);
   }
 
@@ -96,11 +79,6 @@ export class RegionEditForm extends XForm {
         state: 1,
       },
       statesListIds: 1,
-      usersList: {
-        _id: 1,
-        fullName: 1,
-      },
-      usersListIds: 1,
     };
   }
 

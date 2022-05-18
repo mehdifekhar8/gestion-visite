@@ -2,6 +2,7 @@
 import { ObjectId } from "@bluelibs/ejson";
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 import { User } from "../";
+import { Region } from "../";
 
 @Schema()
 export class DoctorCoordinates {
@@ -45,7 +46,6 @@ export class Doctor {
   @Is(an.objectId().nullable())
   createdById?: ObjectId;
 
-  @Is(a.string().required())
   fullName: string;
 
   /**
@@ -62,6 +62,11 @@ export class Doctor {
 
   @Is(() => Schema.from(DoctorProfile))
   profile: DoctorProfile;
+
+  region: Region;
+
+  @Is(an.objectId().required())
+  regionId: ObjectId;
 
   /**
    * @description Represents the last time when the object was updated

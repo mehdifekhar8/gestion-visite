@@ -7,6 +7,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -45,17 +46,6 @@ export class DoctorListFiltersForm extends XForm {
         id: "phone",
         label: t("management.doctors.fields.phone"),
         name: ["phone"],
-        render: (props) => (
-          <Ant.Form.Item {...props}>
-            <Ant.Input />
-          </Ant.Form.Item>
-        ),
-      },
-
-      {
-        id: "fullName",
-        label: t("management.doctors.fields.fullName"),
-        name: ["fullName"],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <Ant.Input />
@@ -156,6 +146,22 @@ export class DoctorListFiltersForm extends XForm {
             <UIComponents.RemoteSelect
               collectionClass={UsersCollection}
               field="fullName"
+              placeholder="Please select an option"
+              mode="multiple"
+            />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
+        id: "regionId",
+        label: t("management.doctors.fields.region"),
+        name: ["regionId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
               placeholder="Please select an option"
               mode="multiple"
             />

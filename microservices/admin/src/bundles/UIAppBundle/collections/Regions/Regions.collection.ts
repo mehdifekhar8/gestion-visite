@@ -42,7 +42,6 @@ export class RegionsCollection extends Collection<Region> {
         collection: () => UsersCollection,
         name: "usersList",
         many: true,
-        field: "usersListIds",
       },
     ];
   }

@@ -12,7 +12,4 @@ export class RegionInsertInput {
 
   @Is(an.objectId().required())
   superVisorId: ObjectId;
-
-  @Is(an.array().of(an.objectId()).required())
-  usersListIds: ObjectId[] = [];
 }

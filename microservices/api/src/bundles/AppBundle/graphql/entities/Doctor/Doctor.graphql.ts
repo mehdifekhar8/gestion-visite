@@ -21,6 +21,8 @@ export default /* GraphQL */ `
     isEnabled: Boolean!
     phone: String!
     profile: DoctorProfile!
+    region: Region!
+    regionId: ObjectId!
 
     """
     Represents the last time when the object was updated

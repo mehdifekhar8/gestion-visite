@@ -9,6 +9,7 @@ import { features } from "./features";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -55,14 +56,6 @@ export class DoctorCreateForm extends XForm {
       },
 
       {
-        id: "fullName",
-        label: t("management.doctors.fields.fullName"),
-        name: ["fullName"],
-        required: true,
-        component: Ant.Input,
-      },
-
-      {
         id: "isEnabled",
         label: t("management.doctors.fields.isEnabled"),
         name: ["isEnabled"],
@@ -103,6 +96,22 @@ export class DoctorCreateForm extends XForm {
             component: Ant.Input,
           },
         ],
+      },
+
+      {
+        id: "regionId",
+        label: t("management.doctors.fields.region"),
+        name: ["regionId"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
+              required={true}
+            />
+          </Ant.Form.Item>
+        ),
       },
     ]);
   }

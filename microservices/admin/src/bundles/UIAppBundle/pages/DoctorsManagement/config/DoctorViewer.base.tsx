@@ -173,6 +173,26 @@ export class DoctorViewer extends XViewer {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "region",
+        label: t("management.doctors.fields.region"),
+        dataIndex: ["region"],
+        render: (value) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.REGIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "name",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
@@ -202,6 +222,11 @@ export class DoctorViewer extends XViewer {
         fullName: 1,
       },
       updatedById: 1,
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 }

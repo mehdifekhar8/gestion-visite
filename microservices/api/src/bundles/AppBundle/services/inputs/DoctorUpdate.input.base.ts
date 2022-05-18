@@ -24,9 +24,6 @@ export class DoctorUpdateInput {
   @Is(() => Schema.from(DoctorCoordinatesInput).nullable())
   coordinates?: DoctorCoordinatesInput;
 
-  @Is(a.string().nullable())
-  fullName?: string;
-
   @Is(a.boolean().nullable())
   isEnabled?: boolean;
 
@@ -35,4 +32,7 @@ export class DoctorUpdateInput {
 
   @Is(() => Schema.from(DoctorProfileInput).nullable())
   profile?: DoctorProfileInput;
+
+  @Is(an.objectId().nullable())
+  regionId?: ObjectId;
 }

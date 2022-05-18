@@ -12,7 +12,4 @@ export class RegionUpdateInput {
 
   @Is(an.objectId().nullable())
   superVisorId?: ObjectId;
-
-  @Is(an.array().of(an.objectId()))
-  usersListIds?: ObjectId[] = [];
 }

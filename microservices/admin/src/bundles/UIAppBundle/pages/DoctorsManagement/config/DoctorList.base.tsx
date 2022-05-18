@@ -9,6 +9,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -189,6 +190,28 @@ export class DoctorList extends XList<Doctor> {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "region",
+        title: t("management.doctors.fields.region"),
+        key: "management.doctors.fields.region",
+        dataIndex: ["region"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.REGIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "name",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
@@ -196,6 +219,7 @@ export class DoctorList extends XList<Doctor> {
     return {
       createdBy: "createdBy.fullName",
       updatedBy: "updatedBy.fullName",
+      region: "region.name",
     };
   }
 
@@ -225,6 +249,11 @@ export class DoctorList extends XList<Doctor> {
         fullName: 1,
       },
       updatedById: 1,
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 }

@@ -2,6 +2,7 @@
 import { ObjectId } from "@bluelibs/ejson";
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 import { IPasswordAuthenticationStrategy } from "@bluelibs/password-bundle";
+import { Region } from "../";
 import { UserRole } from "./enums/UserRole.enum";
 export { UserRole };
 
@@ -56,6 +57,11 @@ export class User {
 
   @Is(() => Schema.from(UserProfile))
   profile: UserProfile;
+
+  region?: Region;
+
+  @Is(an.objectId().nullable())
+  regionId?: ObjectId;
 
   @Is(
     an

@@ -13,7 +13,6 @@
           "name": "Name",
           "superVisorId": "superVisorId",
           "statesListIds": "statesListIds",
-          "usersListIds": "usersListIds",
           "superVisor": "Super Visor",
           "statesList": "States List",
           "usersList": "Users List"

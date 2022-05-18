@@ -5,7 +5,11 @@ import { Service, Inject } from "@bluelibs/core";
 import { SmileOutlined } from "@ant-design/icons";
 import { Routes } from "@bundles/UIAppBundle";
 import * as Ant from "antd";
-import { User, UsersCollection } from "@bundles/UIAppBundle/collections";
+import {
+  User,
+  UsersCollection,
+  RegionsCollection,
+} from "@bundles/UIAppBundle/collections";
 
 @Service({ transient: true })
 export class UserEditForm extends XForm {
@@ -88,6 +92,21 @@ export class UserEditForm extends XForm {
           },
         ],
       },
+
+      {
+        id: "regionId",
+        label: t("management.users.fields.region"),
+        name: ["regionId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
+              required={false}
+            />
+          </Ant.Form.Item>
+        ),
+      },
     ]);
   }
 
@@ -100,6 +119,11 @@ export class UserEditForm extends XForm {
         firstName: 1,
         lastName: 1,
       },
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 

@@ -8,6 +8,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -54,14 +55,6 @@ export class DoctorEditForm extends XForm {
       },
 
       {
-        id: "fullName",
-        label: t("management.doctors.fields.fullName"),
-        name: ["fullName"],
-        required: true,
-        component: Ant.Input,
-      },
-
-      {
         id: "isEnabled",
         label: t("management.doctors.fields.isEnabled"),
         name: ["isEnabled"],
@@ -103,6 +96,22 @@ export class DoctorEditForm extends XForm {
           },
         ],
       },
+
+      {
+        id: "regionId",
+        label: t("management.doctors.fields.region"),
+        name: ["regionId"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
+              required={true}
+            />
+          </Ant.Form.Item>
+        ),
+      },
     ]);
   }
 
@@ -114,12 +123,16 @@ export class DoctorEditForm extends XForm {
         lng: 1,
       },
       phone: 1,
-      fullName: 1,
       isEnabled: 1,
       profile: {
         firstName: 1,
         lastName: 1,
       },
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 

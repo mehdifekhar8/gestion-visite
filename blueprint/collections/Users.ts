@@ -19,7 +19,7 @@ export const Users = collection({
   fields: [
     // Standard fields present for user (isEnabled, createdAt)
     ...shortcuts.fields.user.standard(),
-    
+
     // Information about password storage (hash, email, etc)
     shortcuts.field.user.password(),
     shortcuts.field.softdeletable(),
@@ -41,5 +41,13 @@ export const Users = collection({
       isReducer: true,
     }),
   ],
-  relations: [...shortcuts.relations.blameable()],
+  relations: [
+    ...shortcuts.relations.blameable(),
+    relation({
+      id: "region",
+      to: "Regions",
+      isRequired: false,
+      representedBy: "name",
+    }),
+  ],
 });

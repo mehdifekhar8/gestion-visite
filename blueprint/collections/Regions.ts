@@ -28,13 +28,14 @@ export const Regions = collection({
       id: "statesList",
       to: "States",
       representedBy: "state",
-      isMany:true,
+      isMany: true,
     }),
     relation({
       id: "usersList",
       to: "Users",
       representedBy: "fullName",
-      isMany:true,
+      inversedBy: "region",
+      isMany: true,
     }),
   ],
 });
