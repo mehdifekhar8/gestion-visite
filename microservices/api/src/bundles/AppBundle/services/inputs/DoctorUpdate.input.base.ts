@@ -4,11 +4,11 @@ import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 
 @Schema()
 export class DoctorCoordinatesInput {
-  @Is(a.string().required())
-  lat: string;
+  @Is(a.number().required())
+  lat: number;
 
-  @Is(a.string().required())
-  lng: string;
+  @Is(a.number().required())
+  lng: number;
 }
 @Schema()
 export class DoctorProfileInput {

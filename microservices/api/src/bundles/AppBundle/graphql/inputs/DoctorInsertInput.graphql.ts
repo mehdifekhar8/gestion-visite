@@ -4,12 +4,12 @@ export default /* GraphQL */ `
     isEnabled: Boolean!
     phone: String!
     profile: DoctorProfileInput!
-    regionId: ObjectId!
+    regionId: ObjectId
   }
 
   input DoctorCoordinatesInput {
-    lat: String!
-    lng: String!
+    lat: Float!
+    lng: Float!
   }
   input DoctorProfileInput {
     firstName: String!

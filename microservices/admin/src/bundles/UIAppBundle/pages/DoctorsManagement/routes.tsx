@@ -11,20 +11,16 @@ import { UserRole } from "@root/api.types";
 
 export const DOCTORS_LIST: IRoute = {
   ...BASE_DOCTORS_LIST,
-  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };
 
 export const DOCTORS_CREATE: IRoute = {
   ...BASE_DOCTORS_CREATE,
-  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };
 
 export const DOCTORS_EDIT: IRoute = {
   ...BASE_DOCTORS_EDIT,
-  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };
 
 export const DOCTORS_VIEW: IRoute = {
   ...BASE_DOCTORS_VIEW,
-  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };

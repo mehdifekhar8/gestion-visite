@@ -28,7 +28,7 @@ export class DoctorList extends XList<Doctor> {
         sorter: true,
         render: (value, model) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -42,7 +42,7 @@ export class DoctorList extends XList<Doctor> {
         sorter: true,
         render: (value, model) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
