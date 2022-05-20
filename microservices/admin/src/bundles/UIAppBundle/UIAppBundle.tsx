@@ -16,7 +16,7 @@ export class UIAppBundle extends Bundle {
 
     const router = this.container.get(XRouter);
     router.add(Routes);
-    console.log("isselecte")
-    console.log(router.store[4].menu)
+    
+    
   }
 }

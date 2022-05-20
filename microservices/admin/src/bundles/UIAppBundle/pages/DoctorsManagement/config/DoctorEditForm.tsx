@@ -17,8 +17,8 @@ export class DoctorEditForm extends BaseDoctorEditForm {
     }
     this.update("coordinates", {
       render: (props: { onChange: () => void; value: any } & any) => {
-        console.log("props.value");
-        console.log(props.value);
+        
+        
         return (
           <Ant.Form.Item {...props}>
             <UpdateMarker onChange={props.onChange} value={props.value} />

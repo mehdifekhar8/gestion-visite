@@ -26,7 +26,7 @@ export function InfoBoxComponent() {
   const style = { minHeight: "100vh" };
 
   const onLoad = (infoBox) => {
-    console.log("infoBox: ", infoBox);
+    
   };
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ", // ,

@@ -5,6 +5,7 @@ import { DoctorsList } from "../components/List/DoctorsList";
 import { DoctorsCreate } from "../components/Create/DoctorsCreate";
 import { DoctorsEdit } from "../components/Edit/DoctorsEdit";
 import { DoctorsView } from "../components/View/DoctorsView";
+
 import { SettingFilled } from "@ant-design/icons";
 
 export const DOCTORS_LIST: IRoute = {

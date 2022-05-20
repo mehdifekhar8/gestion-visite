@@ -62,6 +62,20 @@ export class VisitList extends XList<Visit> {
         },
       },
       {
+        id: "information2",
+        title: t("management.visits.fields.information2"),
+        key: "management.visits.fields.information2",
+        dataIndex: ["information2"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "doctor",
         title: t("management.visits.fields.doctor"),
         key: "management.visits.fields.doctor",
@@ -98,6 +112,7 @@ export class VisitList extends XList<Visit> {
       createdAt: 1,
       updatedAt: 1,
       information: 1,
+      information2: 1,
       doctor: {
         _id: 1,
         fullName: 1,

@@ -5,39 +5,38 @@ import {
   LoadScript,
   Marker,
 } from "@react-google-maps/api";
+import { useUIComponents } from "@bluelibs/x-ui";
 
 type Props = {
-  currentLocation?: {
-    location: { lat: number; lng: number };
-    information: string;
+  currentLocation: {
+    _id: string;
+    coordinates: { lat: number; lng: number };
+    fullName: string;
+    phone: string;
   }[];
+  minHeight?: string;
+  width?: string;
 };
 
+type Locations = {
+  _id: string;
+  coordinates: { lat: number; lng: number };
+  fullName: string;
+  phone: string;
+};
+type Coordinates = {
+  lat: number;
+  lng: number;
+};
 export const ViewMarkers: React.FunctionComponent<Props> = ({
-  currentLocation = [
-    {
-      location: { lat: 36.72144321160527, lng: 3.1360724480730218 },
-      information: "hello 1",
-    },
-    { location: { lat: 36.7, lng: 3.28 }, information: "hello 2" },
-    {
-      location: { lat: 36.82144321160527, lng: 3.4360724480730218 },
-      information: "hello 3",
-    },
-  ],
+  currentLocation,
+  minHeight = "50vh",
+  width = "100%",
 }) => {
-  const mapStyles = {
-    minHeight: "50vh",
-    width: "100%",
-  };
-  const [currentPosition, setCurrentPosition] = useState({
-    lat: null,
-    lng: null,
-  });
-  const [selected, setSelected] = useState({
-    location: { lat: null, lng: null },
-    information: "",
-  });
+  // const UIComponents = useUIComponents();
+
+  const [currentPosition, setCurrentPosition] = useState<Coordinates>();
+  const [selected, setSelected] = useState<Locations | undefined>();
 
   const success = (position) => {
     const currentPosition = {
@@ -54,11 +53,11 @@ export const ViewMarkers: React.FunctionComponent<Props> = ({
   return (
     <LoadScript googleMapsApiKey="AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ">
       <GoogleMap
-        mapContainerStyle={mapStyles}
-        zoom={15}
+        mapContainerStyle={{ minHeight, width }}
+        zoom={12}
         center={currentPosition}
       >
-        {currentPosition.lat && (
+        {currentPosition && (
           <Marker
             icon={"http://maps.google.com/mapfiles/kml/paddle/blu-blank.png"}
             position={currentPosition}
@@ -67,22 +66,18 @@ export const ViewMarkers: React.FunctionComponent<Props> = ({
 
         {currentLocation.map((doctor) => (
           <Marker
-            position={doctor.location}
+            position={doctor.coordinates}
             onClick={() => setSelected(doctor)}
           />
         ))}
-        {selected.location.lat && (
+        {selected && (
           <div style={{ position: "relative", top: "10px", color: "red" }}>
             <InfoWindow
-              position={selected.location}
-              onCloseClick={() =>
-                setSelected({
-                  location: { lat: null, lng: null },
-                  information: "",
-                })
-              }
+              position={selected.coordinates}
+              onCloseClick={() => setSelected(undefined)}
             >
-              <p>{selected.information}</p>
+              {/* <UIComponents.AdminListItemRenderer {...props} /> */}
+              <p>{selected.fullName}</p>
             </InfoWindow>
           </div>
         )}

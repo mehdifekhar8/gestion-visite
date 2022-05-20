@@ -3,6 +3,7 @@ import {
   useRouter,
   useUIComponents,
   useTranslate,
+  use,
 } from "@bluelibs/x-ui";
 import { useEffect, useState, useMemo } from "react";
 import { DoctorsAntTableSmart } from "./DoctorsTableSmart";
@@ -11,6 +12,8 @@ import * as Ant from "antd";
 import { Routes } from "@bundles/UIAppBundle";
 import { features } from "../../config/features";
 import { DoctorsListFilters } from "./DoctorsListFilters";
+import { ViewMarkers } from "@bundles/UIAppBundle/components/Map/ViewMarkers";
+import { DoctorsCollection } from "@bundles/UIAppBundle/collections";
 
 export function DoctorsList() {
   const UIComponents = useUIComponents();
@@ -23,9 +26,33 @@ export function DoctorsList() {
       api.setFlexibleFilters(filters);
     };
   }, []);
+  const doctorsCollection = use(DoctorsCollection);
 
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    doctorsCollection
+      .find(
+        {},
+        {
+          // We specify which fields to use
+          _id: 1,
+          fullName: 1,
+          phone: 1,
+          coordinates: {
+            lat: 1,
+            lng: 1,
+          },
+        }
+      )
+      .then((doctors) => {
+        setDoctors(doctors);
+        console.log(doctors);
+      });
+  },[api.getTableProps().dataSource]);
   return (
     <UIComponents.AdminLayout>
+      
       <Ant.PageHeader
         title={t("management.doctors.list.header")}
         extra={[
@@ -69,6 +96,9 @@ export function DoctorsList() {
               }}
             />
             <Ant.Table {...api.getTableProps()} />
+          </div>
+          <div className="doctors-map-view">
+            <ViewMarkers currentLocation={doctors}/>
           </div>
         </Provider>
       </Ant.Layout.Content>

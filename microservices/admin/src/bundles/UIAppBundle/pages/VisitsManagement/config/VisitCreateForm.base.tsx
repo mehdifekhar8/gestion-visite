@@ -31,6 +31,14 @@ export class VisitCreateForm extends XForm {
       },
 
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        name: ["information2"],
+        required: true,
+        component: Ant.Input,
+      },
+
+      {
         id: "doctorId",
         label: t("management.visits.fields.doctor"),
         name: ["doctorId"],

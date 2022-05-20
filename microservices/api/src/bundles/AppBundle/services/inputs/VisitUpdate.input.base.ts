@@ -9,4 +9,7 @@ export class VisitUpdateInput {
 
   @Is(a.string().nullable())
   information?: string;
+
+  @Is(a.string().nullable())
+  information2?: string;
 }

@@ -11,7 +11,6 @@ import * as Ant from "antd";
 import { Routes } from "@bundles/UIAppBundle";
 import { features } from "../../config/features";
 import { StatesListFilters } from "./StatesListFilters";
-import { MyComponent } from "@bundles/UIAppBundle/components/Map/GoogleMaps";
 
 export function StatesList() {
   const UIComponents = useUIComponents();
@@ -73,7 +72,6 @@ export function StatesList() {
           </div>
         </Provider>
       </Ant.Layout.Content>
-      <MyComponent geometry={null}></MyComponent>
     </UIComponents.AdminLayout>
   );
 }

@@ -30,6 +30,14 @@ export class VisitEditForm extends XForm {
       },
 
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        name: ["information2"],
+        required: true,
+        component: Ant.Input,
+      },
+
+      {
         id: "doctorId",
         label: t("management.visits.fields.doctor"),
         name: ["doctorId"],
@@ -51,6 +59,7 @@ export class VisitEditForm extends XForm {
     return {
       _id: 1,
       information: 1,
+      information2: 1,
       doctor: {
         _id: 1,
         fullName: 1,

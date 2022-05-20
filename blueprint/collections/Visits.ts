@@ -15,6 +15,10 @@ export const Visits = collection({
       id: "information",
       type: field.types.STRING,
     }),
+    field({
+      id: "information2",
+      type: field.types.STRING,
+    }),
   ],
   relations: [
     relation({

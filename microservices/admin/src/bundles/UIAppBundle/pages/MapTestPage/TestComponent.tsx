@@ -11,14 +11,14 @@ import { ViewMarkers } from "@bundles/UIAppBundle/components/Map/ViewMarkers";
 export function TestComponent() {
   const style = { minHeight: "100vh" };
 
-  const onChange = (val:google.maps.LatLng) => {
-    console.log(val.lat());
-    console.log(val.lng());
-  };
+  // const onChange = (val:google.maps.LatLng) => {
+    
+    
+  // };
   return <>
   {/* <AddMarker onChange={onChange} />
   <UpdateMarker onChange={onChange}   /> */}
-  <ViewMarkers    />
+  {/* <ViewMarkers    /> */}
   </>;
 }
 

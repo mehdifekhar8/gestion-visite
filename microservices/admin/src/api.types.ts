@@ -707,6 +707,7 @@ export type Visit = {
   doctor: Doctor;
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
+  information2: Scalars['String'];
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
 };
@@ -714,9 +715,11 @@ export type Visit = {
 export type VisitInsertInput = {
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
+  information2: Scalars['String'];
 };
 
 export type VisitUpdateInput = {
   doctorId?: Maybe<Scalars['ObjectId']>;
   information?: Maybe<Scalars['String']>;
+  information2?: Maybe<Scalars['String']>;
 };
