@@ -16,5 +16,7 @@ export class UIAppBundle extends Bundle {
 
     const router = this.container.get(XRouter);
     router.add(Routes);
+    
+    
   }
 }

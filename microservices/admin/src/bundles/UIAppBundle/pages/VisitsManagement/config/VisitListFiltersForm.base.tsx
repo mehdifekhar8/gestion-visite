@@ -53,6 +53,17 @@ export class VisitListFiltersForm extends XForm {
       },
 
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        name: ["information2"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <Ant.Input />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
         id: "doctorId",
         label: t("management.visits.fields.doctor"),
         name: ["doctorId"],

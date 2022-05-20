@@ -22,6 +22,9 @@ export class Visit {
   @Is(a.string().required())
   information: string;
 
+  @Is(a.string().required())
+  information2: string;
+
   /**
    * @description This field is used to identify if this object has been soft-deleted
    */

@@ -62,6 +62,18 @@ export class VisitViewer extends XViewer {
         },
       },
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        dataIndex: ["information2"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "doctor",
         label: t("management.visits.fields.doctor"),
         dataIndex: ["doctor"],
@@ -90,6 +102,7 @@ export class VisitViewer extends XViewer {
       createdAt: 1,
       updatedAt: 1,
       information: 1,
+      information2: 1,
       doctor: {
         _id: 1,
         fullName: 1,

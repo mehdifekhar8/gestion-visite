@@ -9,6 +9,7 @@ export default /* GraphQL */ `
     doctor: Doctor!
     doctorId: ObjectId!
     information: String!
+    information2: String!
 
     """
     Represents the last time when the object was updated

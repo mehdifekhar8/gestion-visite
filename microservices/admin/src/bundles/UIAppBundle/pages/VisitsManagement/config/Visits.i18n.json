@@ -11,6 +11,7 @@
           "updatedAt": "Updated At",
           "updatedAt_description": "Represents the last time when the object was updated",
           "information": "Information",
+          "information2": "Information 2",
           "doctorId": "doctorId",
           "doctor": "Doctor"
         },

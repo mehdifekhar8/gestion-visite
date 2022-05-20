@@ -9,4 +9,7 @@ export class VisitInsertInput {
 
   @Is(a.string().required())
   information: string;
+
+  @Is(a.string().required())
+  information2: string;
 }
