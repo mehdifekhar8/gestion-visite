@@ -10,12 +10,11 @@ import {
 } from "@bluelibs/x-ui";
 import { IMenuItemConfig, MenuService } from "@bluelibs/x-ui-admin";
 
-
 const AntdSubMenu = AntdMenu.SubMenu;
 
 type Translator = (key: string) => string;
 
-export  function AdminMenu() {
+export function AdminMenu() {
   const menuService = use(MenuService);
   const guardian = useGuardian();
   const router = useRouter();
@@ -29,7 +28,7 @@ export  function AdminMenu() {
   // We filter on each render for now because it should be super fast.
   // Otherwise we would need to do it in each MenuItem which can be cumbersome.
   const items = menuService.items.filter((item) => {
-    console.log(item.roles)
+    console.log(item.roles);
     if (item.roles) {
       return guardian.hasRole(item.roles);
     }
@@ -49,7 +48,7 @@ export  function AdminMenu() {
     >
       {/* Make sure that subitems are right under Menu or it will fail */}
       {items.map((item) => {
-        
+        console.log(item)
         return renderItem(item, router, t);
       })}
     </AntdMenu>

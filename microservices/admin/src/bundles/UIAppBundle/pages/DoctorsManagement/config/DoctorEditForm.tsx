@@ -2,6 +2,8 @@ import { Service } from "@bluelibs/core";
 import { DoctorEditForm as BaseDoctorEditForm } from "./DoctorEditForm.base";
 import { QueryBodyType, useGuardian } from "@bluelibs/x-ui";
 import { Doctor } from "@bundles/UIAppBundle/collections";
+import * as Ant from "antd";
+import { UpdateMarker } from "@bundles/UIAppBundle/components/Map/UpdateMarker";
 
 @Service({ transient: true })
 export class DoctorEditForm extends BaseDoctorEditForm {
@@ -13,11 +15,20 @@ export class DoctorEditForm extends BaseDoctorEditForm {
     ) {
       this.remove("regionId");
     }
-    // Perform additional modifications such as updating rendering functions, labels, description
+    this.update("coordinates", {
+      render: (props: { onChange: () => void; value: any } & any) => {
+        console.log("props.value");
+        console.log(props.value);
+        return (
+          <Ant.Form.Item {...props}>
+            <UpdateMarker onChange={props.onChange} value={props.value} />
+          </Ant.Form.Item>
+        );
+      },
+    });
   }
 
   static getRequestBody(): QueryBodyType<Doctor> {
-    // You have the ability to modify the request by adding certain fields or relations
 
     return super.getRequestBody();
   }

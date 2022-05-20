@@ -4,4 +4,5 @@ import { Home } from "./Home";
 export const HOME: IRoute = {
   path: "/",
   component: Home,
+  
 };
