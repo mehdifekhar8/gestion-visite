@@ -9,3 +9,5 @@ export * from "./VisitInsert.input";
 export * from "./VisitUpdate.input";
 export * from "./StateInsert.input";
 export * from "./StateUpdate.input";
+export * from "./RotationInsert.input";
+export * from "./RotationUpdate.input";

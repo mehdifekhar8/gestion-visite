@@ -5,3 +5,4 @@ export * from "./Doctors";
 export * from "./Regions";
 export * from "./Visits";
 export * from "./States";
+export * from "./Rotations";

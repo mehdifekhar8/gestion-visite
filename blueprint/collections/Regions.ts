@@ -23,6 +23,7 @@ export const Regions = collection({
       id: "superVisor",
       to: "Users",
       representedBy: "fullName",
+      isRequired:false
     }),
     relation({
       id: "statesList",

@@ -93,8 +93,9 @@ export default {
         X.CheckPermission([UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR]),
         X.ToModel(UserRegistrationInput, { field: "document" }),
         X.Validate({ field: "document" }),
-        
         async (_, args, ctx) => {
+          console.log(args.document)
+
           const { container } = ctx;
           const xPasswordService = container.get(XPasswordService);
           const collection = container.get(UsersCollection);
@@ -114,11 +115,15 @@ export default {
             firstName: args.document.profile.firstName,
             lastName: args.document.profile.lastName,
           });
-          
+
           await collection.updateOne(
             { _id: userId },
             {
-              $set: { roles: args.document.roles, createdById: ctx.userId },
+              $set: {
+                roles: args.document.roles,
+                createdById: ctx.userId,
+                regionId: args.document.regionId,
+              },
             }
           );
           return userId;
