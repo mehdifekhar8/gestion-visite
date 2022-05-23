@@ -36,6 +36,7 @@ export function UsersCreate() {
           {...formLayout}
           requiredMark="optional"
           onFinish={(document) => {
+            console.log(document)
             userRegistration({
               variables: { document },
             })

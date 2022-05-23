@@ -7,15 +7,16 @@ import { Routes } from "@bundles/UIAppBundle";
 import { Service, Inject } from "@bluelibs/core";
 import { features } from "./features";
 import {
-  User,
+  Rotation,
   UsersCollection,
-  RegionsCollection,
+  DoctorsCollection,
+  RotationsCollection,
 } from "@bundles/UIAppBundle/collections";
 
 @Service({ transient: true })
-export class UserCreateForm extends XForm {
-  @Inject(() => UsersCollection)
-  collection: UsersCollection;
+export class RotationCreateForm extends XForm {
+  @Inject(() => RotationsCollection)
+  collection: RotationsCollection;
 
   build() {
     const { UIComponents } = this;
@@ -23,8 +24,32 @@ export class UserCreateForm extends XForm {
 
     this.add([
       {
+        id: "from",
+        label: t("management.rotations.fields.from"),
+        name: ["from"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.DatePicker required={true} />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
+        id: "to",
+        label: t("management.rotations.fields.to"),
+        name: ["to"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.DatePicker required={true} />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
         id: "roles",
-        label: t("management.users.fields.roles"),
+        label: t("management.rotations.fields.roles"),
         name: ["roles"],
         required: true,
         initialValue: [],
@@ -32,19 +57,13 @@ export class UserCreateForm extends XForm {
           <Ant.Form.Item {...props}>
             <Ant.Select
               mode="multiple"
-              placeholder={t("management.users.fields.roles")}
+              placeholder={t("management.rotations.fields.roles")}
             >
-              <Ant.Select.Option value="ADMIN" key="ADMIN">
-                Admin
+              <Ant.Select.Option value="EACH_DAY" key="EACH_DAY">
+                Each Day
               </Ant.Select.Option>
-              <Ant.Select.Option
-                value="REGION_ADMINISTRATOR"
-                key="REGION_ADMINISTRATOR"
-              >
-                Region Administrator
-              </Ant.Select.Option>
-              <Ant.Select.Option value="DELEGATE" key="DELEGATE">
-                Delegate
+              <Ant.Select.Option value="GLOBAL" key="GLOBAL">
+                Global
               </Ant.Select.Option>
             </Ant.Select>
           </Ant.Form.Item>
@@ -52,10 +71,11 @@ export class UserCreateForm extends XForm {
       },
 
       {
-        id: "isEnabled",
-        label: t("management.users.fields.isEnabled"),
-        name: ["isEnabled"],
+        id: "isDone",
+        label: t("management.rotations.fields.isDone"),
+        name: ["isDone"],
         required: true,
+        initialValue: false,
         render: (props) => (
           <Ant.Form.Item {...props}>
             <Ant.Radio.Group>
@@ -71,39 +91,33 @@ export class UserCreateForm extends XForm {
       },
 
       {
-        id: "profile",
-        label: t("management.users.fields.profile"),
-        name: ["profile"],
+        id: "userId",
+        label: t("management.rotations.fields.user"),
+        name: ["userId"],
         required: true,
-        nest: [
-          {
-            id: "firstName",
-            label: t("management.users.fields.profile.firstName"),
-            name: ["profile", "firstName"],
-            required: true,
-            component: Ant.Input,
-          },
-
-          {
-            id: "lastName",
-            label: t("management.users.fields.profile.lastName"),
-            name: ["profile", "lastName"],
-            required: true,
-            component: Ant.Input,
-          },
-        ],
-      },
-
-      {
-        id: "regionId",
-        label: t("management.users.fields.region"),
-        name: ["regionId"],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <UIComponents.RemoteSelect
-              collectionClass={RegionsCollection}
-              field="name"
-              required={false}
+              collectionClass={UsersCollection}
+              field="fullName"
+              required={true}
+            />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
+        id: "doctorsListIds",
+        label: t("management.rotations.fields.doctorsList"),
+        name: ["doctorsListIds"],
+        required: true,
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={DoctorsCollection}
+              field="fullName"
+              required={true}
+              mode="multiple"
             />
           </Ant.Form.Item>
         ),
@@ -111,30 +125,30 @@ export class UserCreateForm extends XForm {
     ]);
   }
 
-  onSubmit(document: Partial<User>): Promise<void> {
+  onSubmit(document: Partial<Rotation>): Promise<void> {
     const { t } = this.i18n;
-console.log(document)
+
     return this.collection
       .insertOne(document)
       .then(({ _id }) => {
         Ant.notification.success({
           message: t("generics.success"),
-          description: t("management.users.create_confirmation"),
+          description: t("management.rotations.create_confirmation"),
           icon: <SmileOutlined />,
         });
 
         if (features.view) {
-          return this.router.go(Routes.USERS_VIEW, {
+          return this.router.go(Routes.ROTATIONS_VIEW, {
             params: {
               id: _id,
             },
           });
         }
         if (features.list) {
-          return this.router.go(Routes.USERS_LIST);
+          return this.router.go(Routes.ROTATIONS_LIST);
         }
         if (features.edit) {
-          return this.router.go(Routes.USERS_EDIT, {
+          return this.router.go(Routes.ROTATIONS_EDIT, {
             params: {
               id: _id,
             },

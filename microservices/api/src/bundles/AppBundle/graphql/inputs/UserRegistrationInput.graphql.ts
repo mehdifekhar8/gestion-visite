@@ -4,6 +4,7 @@ export default /* GraphQL */ `
     password: String!
     profile: UserProfileInput!
     roles: [UserRole]!
+    regionId: ObjectId
   }
 
   input UserProfileInput {

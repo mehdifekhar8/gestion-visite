@@ -9,3 +9,4 @@ export * from "./DoctorsManagement/routes";
 export * from "./RegionsManagement/routes";
 export * from "./VisitsManagement/routes";
 export * from "./StatesManagement/routes";
+export * from "./RotationsManagement/routes";
