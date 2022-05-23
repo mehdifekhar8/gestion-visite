@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import Geocode from "react-geocode";
 
 type Props = {
   onChange: (val: Coordinates) => void;
@@ -15,19 +16,18 @@ export const AddMarker: React.FunctionComponent<Props> = ({
   minHeight = "50vh",
   width = "100%",
 }) => {
-  const [currentPosition, setCurrentPosition] = useState<
-    Coordinates | undefined
-  >();
+  const [currentPosition, setCurrentPosition] = useState<Coordinates>();
 
-  const [selectedPosition, setSelectedPosition] = useState<
-    Coordinates | undefined
-  >();
+  const [selectedPosition, setSelectedPosition] = useState<Coordinates>();
+  Geocode.setApiKey("AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ");
+  Geocode.setLanguage("fr");
 
   const success = (position) => {
     const currentPosition = {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     };
+
     setCurrentPosition(currentPosition);
   };
 
@@ -37,6 +37,22 @@ export const AddMarker: React.FunctionComponent<Props> = ({
 
   const onSelectedChange = (item: google.maps.MapMouseEvent) => {
     setSelectedPosition({ lat: item.latLng.lat(), lng: item.latLng.lng() });
+    Geocode.fromLatLng(
+      item.latLng.lat().toString(),
+      item.latLng.lng().toString()
+    ).then(
+      (response) => {
+        const address = response.results[0]["address_components"];
+        console.log(address);
+        address.length;
+        console.log("Wilaya: " + address[address.length - 2].long_name);
+        console.log("Daira: " + address[address.length - 3].long_name);
+        console.log("Commune: " + address[address.length - 4].long_name);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
     onChange({ lat: item.latLng.lat(), lng: item.latLng.lng() });
   };
 
