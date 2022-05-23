@@ -5,6 +5,17 @@ import { User } from "../";
 import { Region } from "../";
 
 @Schema()
+export class DoctorAddress {
+  @Is(a.string().nullable())
+  wilaya?: string;
+
+  @Is(a.string().nullable())
+  daira?: string;
+
+  @Is(a.string().nullable())
+  commune?: string;
+}
+@Schema()
 export class DoctorCoordinates {
   @Is(a.number().required())
   lat: number;
@@ -25,6 +36,9 @@ export class DoctorProfile {
 export class Doctor {
   @Is(an.objectId())
   _id?: ObjectId;
+
+  @Is(() => Schema.from(DoctorAddress).nullable())
+  address?: DoctorAddress;
 
   @Is(() => Schema.from(DoctorCoordinates))
   coordinates: DoctorCoordinates;

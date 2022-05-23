@@ -82,6 +82,7 @@ export type ChangePasswordInput = {
 export type Doctor = {
   __typename?: 'Doctor';
   _id?: Maybe<Scalars['ObjectId']>;
+  address?: Maybe<DoctorAddress>;
   coordinates: DoctorCoordinates;
   /** Represents the date when this object was created */
   createdAt: Scalars['Date'];
@@ -103,6 +104,19 @@ export type Doctor = {
   updatedById?: Maybe<Scalars['ObjectId']>;
 };
 
+export type DoctorAddress = {
+  __typename?: 'DoctorAddress';
+  wilaya?: Maybe<Scalars['String']>;
+  daira?: Maybe<Scalars['String']>;
+  commune?: Maybe<Scalars['String']>;
+};
+
+export type DoctorAddressInput = {
+  wilaya?: Maybe<Scalars['String']>;
+  daira?: Maybe<Scalars['String']>;
+  commune?: Maybe<Scalars['String']>;
+};
+
 export type DoctorCoordinates = {
   __typename?: 'DoctorCoordinates';
   lat: Scalars['Float'];
@@ -115,6 +129,7 @@ export type DoctorCoordinatesInput = {
 };
 
 export type DoctorInsertInput = {
+  address?: Maybe<DoctorAddressInput>;
   coordinates: DoctorCoordinatesInput;
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
@@ -134,6 +149,7 @@ export type DoctorProfileInput = {
 };
 
 export type DoctorUpdateInput = {
+  address?: Maybe<DoctorAddressInput>;
   coordinates?: Maybe<DoctorCoordinatesInput>;
   isEnabled?: Maybe<Scalars['Boolean']>;
   phone?: Maybe<Scalars['String']>;

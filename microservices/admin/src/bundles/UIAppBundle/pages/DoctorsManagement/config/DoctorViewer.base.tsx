@@ -14,6 +14,42 @@ export class DoctorViewer extends XViewer {
 
     this.add([
       {
+        id: "address.wilaya",
+        label: t("management.doctors.fields.address.wilaya"),
+        dataIndex: ["address", "wilaya"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.daira",
+        label: t("management.doctors.fields.address.daira"),
+        dataIndex: ["address", "daira"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.commune",
+        label: t("management.doctors.fields.address.commune"),
+        dataIndex: ["address", "commune"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "coordinates.lat",
         label: t("management.doctors.fields.coordinates.lat"),
         dataIndex: ["coordinates", "lat"],
@@ -199,6 +235,11 @@ export class DoctorViewer extends XViewer {
   static getRequestBody(): QueryBodyType<Doctor> {
     return {
       _id: 1,
+      address: {
+        wilaya: 1,
+        daira: 1,
+        commune: 1,
+      },
       coordinates: {
         lat: 1,
         lng: 1,

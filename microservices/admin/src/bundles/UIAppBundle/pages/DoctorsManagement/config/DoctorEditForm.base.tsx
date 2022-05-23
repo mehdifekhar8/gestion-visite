@@ -23,6 +23,34 @@ export class DoctorEditForm extends XForm {
 
     this.add([
       {
+        id: "address",
+        label: t("management.doctors.fields.address"),
+        name: ["address"],
+        nest: [
+          {
+            id: "wilaya",
+            label: t("management.doctors.fields.address.wilaya"),
+            name: ["address", "wilaya"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "daira",
+            label: t("management.doctors.fields.address.daira"),
+            name: ["address", "daira"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "commune",
+            label: t("management.doctors.fields.address.commune"),
+            name: ["address", "commune"],
+            component: Ant.Input,
+          },
+        ],
+      },
+
+      {
         id: "coordinates",
         label: t("management.doctors.fields.coordinates"),
         name: ["coordinates"],
@@ -117,6 +145,11 @@ export class DoctorEditForm extends XForm {
   static getRequestBody(): QueryBodyType<Doctor> {
     return {
       _id: 1,
+      address: {
+        wilaya: 1,
+        daira: 1,
+        commune: 1,
+      },
       coordinates: {
         lat: 1,
         lng: 1,

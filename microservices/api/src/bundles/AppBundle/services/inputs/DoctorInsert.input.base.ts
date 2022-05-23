@@ -3,6 +3,17 @@ import { ObjectId } from "@bluelibs/ejson";
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 
 @Schema()
+export class DoctorAddressInput {
+  @Is(a.string().nullable())
+  wilaya?: string;
+
+  @Is(a.string().nullable())
+  daira?: string;
+
+  @Is(a.string().nullable())
+  commune?: string;
+}
+@Schema()
 export class DoctorCoordinatesInput {
   @Is(a.number().required())
   lat: number;
@@ -21,6 +32,9 @@ export class DoctorProfileInput {
 
 @Schema()
 export class DoctorInsertInput {
+  @Is(() => Schema.from(DoctorAddressInput).nullable())
+  address?: DoctorAddressInput;
+
   @Is(() => Schema.from(DoctorCoordinatesInput))
   coordinates: DoctorCoordinatesInput;
 

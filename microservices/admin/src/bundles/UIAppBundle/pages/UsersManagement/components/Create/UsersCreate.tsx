@@ -24,7 +24,7 @@ export function UsersCreate() {
   const t = useTranslate();
   const form = use(UserCreateForm, { transient: true });
   form.build();
-
+  
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
