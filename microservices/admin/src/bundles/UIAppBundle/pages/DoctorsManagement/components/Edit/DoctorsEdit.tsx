@@ -79,7 +79,7 @@ export function DoctorsEdit(props: { id: string }) {
             {...formLayout}
             requiredMark="optional"
             initialValues={document as Doctor}
-            onFinish={(document) => form.onSubmit(props.id, document)}
+            onFinish={(document) => form.onSubmitCustom(props.id, document)}
           >
             {form.render()}
             <Ant.Form.Item {...formTailLayout}>

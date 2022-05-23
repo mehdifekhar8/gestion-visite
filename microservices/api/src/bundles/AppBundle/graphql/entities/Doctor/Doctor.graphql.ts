@@ -1,6 +1,7 @@
 export default /* GraphQL */ `
   type Doctor {
     _id: ObjectId
+    address: DoctorAddress
     coordinates: DoctorCoordinates!
 
     """
@@ -40,6 +41,11 @@ export default /* GraphQL */ `
     updatedById: ObjectId
   }
 
+  type DoctorAddress {
+    wilaya: String
+    daira: String
+    commune: String
+  }
   type DoctorCoordinates {
     lat: Float!
     lng: Float!

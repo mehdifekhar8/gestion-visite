@@ -37,6 +37,29 @@ export const Doctors = collection({
         }),
       ],
     }),
+    field({
+      id: "address",
+      type: field.types.OBJECT,
+      isRequired:false,
+      subfields: [
+        field({
+          id: "wilaya",
+          type: field.types.STRING,
+          isRequired:false
+        }),
+        field({
+          id: "daira",
+          type: field.types.STRING,
+          isRequired:false
+        }),
+        field({
+          id: "commune",
+          type: field.types.STRING,
+          isRequired:false
+        }),
+     
+      ],
+    }),
   ],
   relations: [
     ...shortcuts.relations.blameable(),

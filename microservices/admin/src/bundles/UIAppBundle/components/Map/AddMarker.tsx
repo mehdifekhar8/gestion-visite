@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 
@@ -17,8 +17,9 @@ export const AddMarker: React.FunctionComponent<Props> = ({
   width = "100%",
 }) => {
   const [currentPosition, setCurrentPosition] = useState<Coordinates>();
-
   const [selectedPosition, setSelectedPosition] = useState<Coordinates>();
+  const [address, setAddress] = useState<string>();
+
   Geocode.setApiKey("AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ");
   Geocode.setLanguage("fr");
 
@@ -43,11 +44,14 @@ export const AddMarker: React.FunctionComponent<Props> = ({
     ).then(
       (response) => {
         const address = response.results[0]["address_components"];
-        console.log(address);
-        address.length;
-        console.log("Wilaya: " + address[address.length - 2].long_name);
-        console.log("Daira: " + address[address.length - 3].long_name);
-        console.log("Commune: " + address[address.length - 4].long_name);
+        setAddress(
+          "Address: " +
+            address[address.length - 2].long_name +
+            ", " +
+            address[address.length - 3].long_name +
+            ", " +
+            address[address.length - 4].long_name
+        );
       },
       (error) => {
         console.error(error);
@@ -57,21 +61,24 @@ export const AddMarker: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ">
-      <GoogleMap
-        mapContainerStyle={{ minHeight, width }}
-        zoom={20}
-        center={currentPosition}
-        onClick={onSelectedChange}
-      >
-        {currentPosition && (
-          <Marker
-            icon={"http://maps.google.com/mapfiles/kml/paddle/blu-blank.png"}
-            position={currentPosition}
-          />
-        )}
-        {selectedPosition && <Marker position={selectedPosition} />}
-      </GoogleMap>
-    </LoadScript>
+    <Fragment>
+      <LoadScript googleMapsApiKey="AIzaSyBa9CtZ1XtdrQePGh1WRwpvBXWBUAN2pFQ">
+        <GoogleMap
+          mapContainerStyle={{ minHeight, width }}
+          zoom={20}
+          center={currentPosition}
+          onClick={onSelectedChange}
+        >
+          {currentPosition && (
+            <Marker
+              icon={"http://maps.google.com/mapfiles/kml/paddle/blu-blank.png"}
+              position={currentPosition}
+            />
+          )}
+          {selectedPosition && <Marker position={selectedPosition} />}
+        </GoogleMap>
+      </LoadScript>
+      <h4 style={{marginTop: "14px"}}>{address} </h4>
+    </Fragment>
   );
 };

@@ -18,7 +18,7 @@ export function DoctorsCreate() {
   const t = useTranslate();
   const form = use(DoctorCreateForm, { transient: true });
   form.build();
-
+ 
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -29,7 +29,7 @@ export function DoctorsCreate() {
         <Ant.Form
           {...formLayout}
           requiredMark="optional"
-          onFinish={(document) => form.onSubmit(document)}
+          onFinish={(document) => form.onSubmitCustom(document)}
         >
           {form.render()}
           <Ant.Form.Item {...formTailLayout}>

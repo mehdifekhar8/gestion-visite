@@ -19,6 +19,35 @@ export class DoctorListFiltersForm extends XForm {
 
     this.add([
       {
+        id: "address",
+        label: t("management.doctors.fields.address"),
+        name: ["address"],
+        columns: true,
+        nest: [
+          {
+            id: "wilaya",
+            label: t("management.doctors.fields.address.wilaya"),
+            name: ["address", "wilaya"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "daira",
+            label: t("management.doctors.fields.address.daira"),
+            name: ["address", "daira"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "commune",
+            label: t("management.doctors.fields.address.commune"),
+            name: ["address", "commune"],
+            component: Ant.Input,
+          },
+        ],
+      },
+
+      {
         id: "coordinates",
         label: t("management.doctors.fields.coordinates"),
         name: ["coordinates"],

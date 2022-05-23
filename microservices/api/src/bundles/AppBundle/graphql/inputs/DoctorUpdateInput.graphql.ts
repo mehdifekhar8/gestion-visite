@@ -1,5 +1,6 @@
 export default /* GraphQL */ `
   input DoctorUpdateInput {
+    address: DoctorAddressInput
     coordinates: DoctorCoordinatesInput
     isEnabled: Boolean
     phone: String
@@ -7,6 +8,11 @@ export default /* GraphQL */ `
     regionId: ObjectId
   }
 
+  input DoctorAddressInput {
+    wilaya: String
+    daira: String
+    commune: String
+  }
   input DoctorCoordinatesInput {
     lat: Float!
     lng: Float!
