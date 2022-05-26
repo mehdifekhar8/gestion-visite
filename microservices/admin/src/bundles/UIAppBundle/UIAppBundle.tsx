@@ -9,7 +9,7 @@ import { AdminMenu } from "./overrides/AdminMenu";
 export class UIAppBundle extends Bundle {
   async init() {
     const xui = this.container.get(XUIBundle);
-    xui.updateComponents({AdminMenu ,...ComponentOverrides});
+    xui.updateComponents({AdminMenu, ,...ComponentOverrides});
 
     xui.setGuardianClass(AppGuardian);
     xui.storeI18N(i18n);

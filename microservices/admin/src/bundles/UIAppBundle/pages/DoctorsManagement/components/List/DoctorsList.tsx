@@ -27,6 +27,7 @@ export function DoctorsList() {
     };
   }, []);
   const doctorsCollection = use(DoctorsCollection);
+  const { TabPane } = Ant.Tabs;
 
   const [doctors, setDoctors] = useState([]);
 
@@ -47,12 +48,10 @@ export function DoctorsList() {
       )
       .then((doctors) => {
         setDoctors(doctors);
-        console.log(doctors);
       });
-  },[api.getTableProps().dataSource]);
+  }, [api.getTableProps().dataSource]);
   return (
     <UIComponents.AdminLayout>
-      
       <Ant.PageHeader
         title={t("management.doctors.list.header")}
         extra={[
@@ -89,16 +88,27 @@ export function DoctorsList() {
               className="search"
               onKeyUp={(e) => {
                 const value = (e.target as HTMLInputElement).value;
+                console.log(value);
+
                 api.setFilters({
-                  // Customise your search filters!
-                  title: new RegExp(`${value}`, "i"),
+                  '$text': { '$search': 'v1' } ,
+                  // $or: [
+                  //   { "profile.lastName": new RegExp(`${value.split(' ')}`, "i") },
+                  //   { "profile.firstName": new RegExp(`${value.split(' ')}`, "i") },
+                  // ],
                 });
               }}
             />
-            <Ant.Table {...api.getTableProps()} />
-          </div>
-          <div className="doctors-map-view">
-            <ViewMarkers currentLocation={doctors}/>
+            <Ant.Tabs defaultActiveKey="1" onChange={() => {}}>
+              <TabPane tab="Tab 1" key="1">
+                <Ant.Table {...api.getTableProps()} />
+              </TabPane>
+              <TabPane tab="Tab 2" key="2">
+                <div className="doctors-map-view">
+                  <ViewMarkers currentLocation={doctors} />
+                </div>
+              </TabPane>
+            </Ant.Tabs>
           </div>
         </Provider>
       </Ant.Layout.Content>

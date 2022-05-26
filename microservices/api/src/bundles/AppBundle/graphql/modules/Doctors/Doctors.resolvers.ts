@@ -25,10 +25,15 @@ export default {
             )
           ) {
             args.query = {
-              filters: { regionId: currentUser.regionId },
+              ...args.query,
+              filters: {
+                ...args.query.filters,
+                regionId: currentUser.regionId,
+              },
             };
           }
-
+          
+          console.log(args.query);
           return args.query;
         }),
       ],

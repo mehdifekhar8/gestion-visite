@@ -8,3 +8,4 @@ export { UserRole } from "./enums/UserRole.enum";
 export class User extends BaseUser {
   // You can extend the base here
 }
+  
