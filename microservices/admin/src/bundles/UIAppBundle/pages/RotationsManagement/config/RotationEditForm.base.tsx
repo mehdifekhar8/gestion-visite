@@ -47,16 +47,16 @@ export class RotationEditForm extends XForm {
       },
 
       {
-        id: "roles",
-        label: t("management.rotations.fields.roles"),
-        name: ["roles"],
+        id: "type",
+        label: t("management.rotations.fields.type"),
+        name: ["type"],
         required: true,
         initialValue: [],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <Ant.Select
               mode="multiple"
-              placeholder={t("management.rotations.fields.roles")}
+              placeholder={t("management.rotations.fields.type")}
             >
               <Ant.Select.Option value="EACH_DAY" key="EACH_DAY">
                 Each Day
@@ -129,7 +129,7 @@ export class RotationEditForm extends XForm {
       _id: 1,
       from: 1,
       to: 1,
-      roles: 1,
+      type: 1,
       isDone: 1,
       user: {
         _id: 1,

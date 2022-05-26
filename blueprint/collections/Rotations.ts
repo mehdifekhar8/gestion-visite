@@ -19,9 +19,18 @@ export const Rotations = collection({
       id: "to",
       type: field.types.DATE,
     }),
+    field({
+      id: "dateIntervale",
+      type: field.types.STRING,
+      isReducer: true,
+      reducerDependency: {
+        from: 1,
+        to: 1,
+      },
+    }),
 
     field({
-      id: "roles",
+      id: "type",
       type: field.types.ENUM,
       enumValues: ["EACH_DAY", "GLOBAL"],
       isArray: true,
@@ -43,7 +52,7 @@ export const Rotations = collection({
       id: "doctorsList",
       to: "Doctors",
       representedBy: "fullName",
-      isMany:true
+      isMany: true,
     }),
   ],
 });

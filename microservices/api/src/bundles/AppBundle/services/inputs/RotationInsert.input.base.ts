@@ -1,7 +1,7 @@
 /** @overridable */
 import { ObjectId } from "@bluelibs/ejson";
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
-import { RotationRole } from "../../collections";
+import { RotationType } from "../../collections";
 
 @Schema()
 export class RotationInsertInput {
@@ -14,16 +14,16 @@ export class RotationInsertInput {
   @Is(a.boolean().required())
   isDone: boolean = false;
 
+  @Is(a.date().required())
+  to: Date;
+
   @Is(
     an
       .array()
-      .of(a.string().oneOf(Object.values(RotationRole).concat(null)))
+      .of(a.string().oneOf(Object.values(RotationType).concat(null)))
       .required()
   )
-  roles: RotationRole[] = [];
-
-  @Is(a.date().required())
-  to: Date;
+  type: RotationType[] = [];
 
   @Is(an.objectId().required())
   userId: ObjectId;

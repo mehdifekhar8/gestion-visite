@@ -12,7 +12,6 @@ export default {
       //todo check that every thing is correct
       DoctorsFindOne: [X.ToNovaOne(DoctorsCollection)],
       DoctorsFind: [
-        X.ToNova(DoctorsCollection),
         X.ToNova(DoctorsCollection, async (_, args, ctx, info) => {
           const { container } = ctx;
           const usersCollection = container.get(UsersCollection);
@@ -24,10 +23,12 @@ export default {
               currentUser.roles.includes(UserRole.ADMIN) ||
               currentUser.roles.includes(UserRole.REGION_ADMINISTRATOR)
             )
-          )
+          ) {
             args.query = {
               filters: { regionId: currentUser.regionId },
             };
+          }
+
           return args.query;
         }),
       ],

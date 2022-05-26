@@ -9,8 +9,8 @@ export default /* GraphQL */ `
     name: String!
     statesList: [State]!
     statesListIds: [ObjectId]!
-    superVisor: User!
-    superVisorId: ObjectId!
+    superVisor: User
+    superVisorId: ObjectId
 
     """
     Represents the last time when the object was updated

@@ -64,7 +64,7 @@ export function VisitsList() {
                 const value = (e.target as HTMLInputElement).value;
                 api.setFilters({
                   // Customise your search filters!
-                  title: new RegExp(`${value}`, "i"),
+                  doctor:{_id: "628cf54ef3504210345cecea"}
                 });
               }}
             />

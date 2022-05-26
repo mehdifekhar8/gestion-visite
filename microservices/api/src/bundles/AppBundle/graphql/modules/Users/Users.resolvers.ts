@@ -38,10 +38,10 @@ export default {
             _id: ctx.userId,
           });
           if (!currentUser.roles.includes(UserRole.ADMIN))
+          
             args.query = {
-              filters: { createdById: ctx.userId },
+              filters: { createdById: ctx.userId}, 
             };
-          console.log(args);
           return args.query;
         }),
       ],

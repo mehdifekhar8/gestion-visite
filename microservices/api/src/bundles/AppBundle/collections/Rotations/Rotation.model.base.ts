@@ -3,8 +3,8 @@ import { ObjectId } from "@bluelibs/ejson";
 import { Schema, Is, a, an } from "@bluelibs/validator-bundle";
 import { User } from "../";
 import { Doctor } from "../";
-import { RotationRole } from "./enums/RotationRole.enum";
-export { RotationRole };
+import { RotationType } from "./enums/RotationType.enum";
+export { RotationType };
 
 @Schema()
 export class Rotation {
@@ -28,6 +28,8 @@ export class Rotation {
   @Is(an.objectId().nullable())
   createdById?: ObjectId;
 
+  dateIntervale: string;
+
   doctorsList: Doctor[] = [];
 
   @Is(an.array().of(an.objectId()).required())
@@ -45,16 +47,16 @@ export class Rotation {
   @Is(a.boolean().required())
   isDone: boolean = false;
 
+  @Is(a.date().required())
+  to: Date;
+
   @Is(
     an
       .array()
-      .of(a.string().oneOf(Object.values(RotationRole).concat(null)))
+      .of(a.string().oneOf(Object.values(RotationType).concat(null)))
       .required()
   )
-  roles: RotationRole[];
-
-  @Is(a.date().required())
-  to: Date;
+  type: RotationType[];
 
   /**
    * @description Represents the last time when the object was updated
