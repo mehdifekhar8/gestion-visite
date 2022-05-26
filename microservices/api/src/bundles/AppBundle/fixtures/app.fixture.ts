@@ -4,7 +4,7 @@ import { EJSON } from "@bluelibs/ejson";
 import { PasswordService } from "@bluelibs/password-bundle";
 import { PermissionService, SecurityService } from "@bluelibs/security-bundle";
 
-import dataMap from "./app.dataMap";
+import dataMap from "./oneUser.dataMap";
 
 @Service()
 export class AppFixture {
@@ -81,7 +81,7 @@ export class AppFixture {
 
   // Runs if all data maps are empty or we're in a test environment
   async shouldRun() {
-  //return true
+ return false
     if (this.kernel.isTesting()) return false;
 
     for (const collectionName in dataMap) {

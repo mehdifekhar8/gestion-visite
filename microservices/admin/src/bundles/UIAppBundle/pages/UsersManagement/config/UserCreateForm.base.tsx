@@ -113,7 +113,7 @@ export class UserCreateForm extends XForm {
 
   onSubmit(document: Partial<User>): Promise<void> {
     const { t } = this.i18n;
-console.log(document)
+
     return this.collection
       .insertOne(document)
       .then(({ _id }) => {

@@ -1,7 +1,7 @@
 export default {
   resolvers: {
     Rotation: {},
-    RotationRole: {
+    RotationType: {
       EACH_DAY: "EACH_DAY",
       GLOBAL: "GLOBAL",
     },

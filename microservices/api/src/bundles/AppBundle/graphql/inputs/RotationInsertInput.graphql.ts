@@ -3,8 +3,8 @@ export default /* GraphQL */ `
     doctorsListIds: [ObjectId]!
     from: Date!
     isDone: Boolean!
-    roles: [RotationRole]!
     to: Date!
+    type: [RotationType]!
     userId: ObjectId!
   }
 `;

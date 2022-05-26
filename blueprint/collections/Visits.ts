@@ -19,12 +19,37 @@ export const Visits = collection({
       id: "information2",
       type: field.types.STRING,
     }),
+    field({
+      id: "coordinates",
+      type: field.types.OBJECT,
+      subfields: [
+        field({
+          id: "lat",
+          type: field.types.FLOAT,
+        }),
+        field({
+          id: "lng",
+          type: field.types.FLOAT,
+        }),
+      ],
+    }),
+    field({
+      id: "locationValidation",
+      type: field.types.FLOAT,
+    }),
   ],
   relations: [
+    ...shortcuts.relations.blameable(),
     relation({
       id: "doctor",
       to: "Doctors",
       representedBy: "fullName",
+    }),
+    relation({
+      id: "rotation",
+      to: "Rotations",
+      representedBy: "dateIntervale",
+      isRequired:false,
     }),
   ],
 });

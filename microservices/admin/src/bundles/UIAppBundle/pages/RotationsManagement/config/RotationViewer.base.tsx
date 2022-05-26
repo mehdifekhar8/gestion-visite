@@ -74,9 +74,21 @@ export class RotationViewer extends XViewer {
         },
       },
       {
-        id: "roles",
-        label: t("management.rotations.fields.roles"),
-        dataIndex: ["roles"],
+        id: "dateIntervale",
+        label: t("management.rotations.fields.dateIntervale"),
+        dataIndex: ["dateIntervale"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "type",
+        label: t("management.rotations.fields.type"),
+        dataIndex: ["type"],
         render: (value) => {
           return (
             <>
@@ -206,7 +218,8 @@ export class RotationViewer extends XViewer {
       updatedAt: 1,
       from: 1,
       to: 1,
-      roles: 1,
+      dateIntervale: 1,
+      type: 1,
       isDone: 1,
       createdBy: {
         _id: 1,

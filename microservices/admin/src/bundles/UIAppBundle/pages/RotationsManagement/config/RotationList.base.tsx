@@ -77,10 +77,24 @@ export class RotationList extends XList<Rotation> {
         },
       },
       {
-        id: "roles",
-        title: t("management.rotations.fields.roles"),
-        key: "management.rotations.fields.roles",
-        dataIndex: ["roles"],
+        id: "dateIntervale",
+        title: t("management.rotations.fields.dateIntervale"),
+        key: "management.rotations.fields.dateIntervale",
+        dataIndex: ["dateIntervale"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "type",
+        title: t("management.rotations.fields.type"),
+        key: "management.rotations.fields.type",
+        dataIndex: ["type"],
         sorter: true,
         render: (value, model) => {
           return (
@@ -230,7 +244,8 @@ export class RotationList extends XList<Rotation> {
       updatedAt: 1,
       from: 1,
       to: 1,
-      roles: 1,
+      dateIntervale: 1,
+      type: 1,
       isDone: 1,
       createdBy: {
         _id: 1,

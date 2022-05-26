@@ -65,14 +65,14 @@ export class RotationListFiltersForm extends XForm {
       },
 
       {
-        id: "roles",
-        label: t("management.rotations.fields.roles"),
-        name: ["roles"],
+        id: "type",
+        label: t("management.rotations.fields.type"),
+        name: ["type"],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <Ant.Select
               mode="multiple"
-              placeholder={t("management.rotations.fields.roles")}
+              placeholder={t("management.rotations.fields.type")}
             >
               <Ant.Select.Option value="EACH_DAY" key="EACH_DAY">
                 Each Day

@@ -2,13 +2,72 @@ import * as X from "@bluelibs/x-bundle";
 import { IResolverMap } from "@bluelibs/graphql-bundle";
 import { VisitInsertInput, VisitUpdateInput } from "../../../services/inputs";
 import { VisitsCollection } from "../../../collections/Visits/Visits.collection";
+import {
+  DoctorsCollection,
+  UserRole,
+  UsersCollection,
+} from "@bundles/AppBundle/collections";
+import { ISecureOptions, lookup, query } from "@bluelibs/nova";
+import { ObjectId } from "mongodb";
 
 export default {
   Query: [
     [],
     {
       VisitsFindOne: [X.ToNovaOne(VisitsCollection)],
-      VisitsFind: [X.ToNova(VisitsCollection)],
+      VisitsFind: [
+        async (_, args, ctx, info) => {
+          const { container } = ctx;
+          const visitsCollection = container.get(VisitsCollection);
+          const doctorsCollection = container.get(DoctorsCollection);
+          const usersCollection = container.get(UsersCollection);
+          const currentUser = await usersCollection.findOne({
+            _id: ctx.userId,
+          });
+
+          const result = await visitsCollection.queryGraphQL(info, {
+            embody(body, getArguments): any {
+              const visitsArgument = getArguments("visits");
+          
+              if (currentUser.roles.includes(UserRole.ADMIN)) {
+                body.$ = { ...body.$ };
+              } else if (
+                currentUser.roles.includes(UserRole.REGION_ADMINISTRATOR)
+              ) {
+                body.$ = {
+                  ...body.$,
+                  pipeline: [
+                    lookup(visitsCollection.collection, "doctor", {
+                      pipeline: [
+                        lookup(doctorsCollection.collection, "region"),
+                        {
+                          $match: {
+                            "region.superVisorId": ctx.userId,
+                          },
+                        },
+                      ],
+                    }),
+
+                    {
+                      $match: {
+                        "doctor.isEnabled": true,
+                      },
+                    },
+                  ],
+                };
+              } else if (currentUser.roles.includes(UserRole.DELEGATE)) {
+                body.$ = {
+                  ...body.$,
+                 filters :{... body.$.filters,createdById:ctx.userId}
+                };
+              }
+              console.log(body);
+            },
+          });
+          console.log(result.length);
+          return result;
+        },
+      ],
       VisitsCount: [X.ToCollectionCount(VisitsCollection)],
     },
   ],

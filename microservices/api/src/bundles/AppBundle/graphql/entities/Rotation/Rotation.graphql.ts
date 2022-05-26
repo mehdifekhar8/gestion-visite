@@ -16,12 +16,13 @@ export default /* GraphQL */ `
     Represents the user's id who has created this object
     """
     createdById: ObjectId
+    dateIntervale: String!
     doctorsList: [Doctor]!
     doctorsListIds: [ObjectId]!
     from: Date!
     isDone: Boolean!
-    roles: [RotationRole]!
     to: Date!
+    type: [RotationType]!
 
     """
     Represents the last time when the object was updated
@@ -41,7 +42,7 @@ export default /* GraphQL */ `
     userId: ObjectId!
   }
 
-  enum RotationRole {
+  enum RotationType {
     EACH_DAY
     GLOBAL
   }

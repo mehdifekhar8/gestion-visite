@@ -28,7 +28,6 @@ export function AdminMenu() {
   // We filter on each render for now because it should be super fast.
   // Otherwise we would need to do it in each MenuItem which can be cumbersome.
   const items = menuService.items.filter((item) => {
-    
     if (item.roles) {
       return guardian.hasRole(item.roles);
     }
@@ -42,13 +41,14 @@ export function AdminMenu() {
 
   return (
     <AntdMenu
+      theme={"dark"}
       mode="inline"
+      style={{ height: "100%" }}
       defaultOpenKeys={selectedOrOpenKeys}
       defaultSelectedKeys={selectedOrOpenKeys}
     >
       {/* Make sure that subitems are right under Menu or it will fail */}
       {items.map((item) => {
-        
         return renderItem(item, router, t);
       })}
     </AntdMenu>
