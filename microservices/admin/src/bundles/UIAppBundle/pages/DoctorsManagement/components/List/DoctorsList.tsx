@@ -7,13 +7,15 @@ import {
 } from "@bluelibs/x-ui";
 import { useEffect, useState, useMemo } from "react";
 import { DoctorsAntTableSmart } from "./DoctorsTableSmart";
-import { PlusOutlined, FilterOutlined } from "@ant-design/icons";
+import { PlusOutlined, FilterOutlined, ProfileFilled } from "@ant-design/icons";
 import * as Ant from "antd";
+
 import { Routes } from "@bundles/UIAppBundle";
 import { features } from "../../config/features";
 import { DoctorsListFilters } from "./DoctorsListFilters";
 import { ViewMarkers } from "@bundles/UIAppBundle/components/Map/ViewMarkers";
 import { DoctorsCollection } from "@bundles/UIAppBundle/collections";
+import Title from "antd/lib/skeleton/Title";
 
 export function DoctorsList() {
   const UIComponents = useUIComponents();
@@ -28,8 +30,10 @@ export function DoctorsList() {
   }, []);
   const doctorsCollection = use(DoctorsCollection);
   const { TabPane } = Ant.Tabs;
-
   const [doctors, setDoctors] = useState([]);
+
+  console.log("data")
+  console.log()
 
   useEffect(() => {
     doctorsCollection
@@ -88,24 +92,30 @@ export function DoctorsList() {
               className="search"
               onKeyUp={(e) => {
                 const value = (e.target as HTMLInputElement).value;
-                console.log(value);
 
-                api.setFilters({
-                  '$text': { '$search': 'v1' } ,
-                  // $or: [
-                  //   { "profile.lastName": new RegExp(`${value.split(' ')}`, "i") },
-                  //   { "profile.firstName": new RegExp(`${value.split(' ')}`, "i") },
-                  // ],
-                });
+                console.log(api.getBody());
+                const keys = Object.keys(api.getBody());
+                console.log(keys);
+                value
+                  ? api.setFilters({
+                      $text: { $search: value },
+                    })
+                  : api.setFilters({});
               }}
             />
-            <Ant.Tabs defaultActiveKey="1" onChange={() => {}}>
-              <TabPane tab="Tab 1" key="1">
-                <Ant.Table {...api.getTableProps()} />
+            <Ant.Tabs defaultActiveKey="1" size={"large"} >
+              <TabPane tab="Doctors" key="1">
+                <Ant.Table
+                  expandable={{
+                    expandedRowRender: (record) => OtherInformationCard(record),
+                  }}
+                  scroll={{ x: 960 }}
+                  {...api.getTableProps()}
+                />
               </TabPane>
-              <TabPane tab="Tab 2" key="2">
+              <TabPane tab="Map" key="2">
                 <div className="doctors-map-view">
-                  <ViewMarkers currentLocation={doctors} />
+                  <ViewMarkers currentLocation={api.getTableProps().dataSource} />
                 </div>
               </TabPane>
             </Ant.Tabs>
@@ -113,5 +123,24 @@ export function DoctorsList() {
         </Provider>
       </Ant.Layout.Content>
     </UIComponents.AdminLayout>
+  );
+}
+function OtherInformationCard(record) {
+  return (
+    <Ant.Card title="Other information's" bordered={false}>
+      <h4>First Name: {record.profile.firstName}</h4>
+      <h4>Last Name :{record.profile.lastName}</h4>
+      <h4>
+        Address : <Ant.Tag color="green"> {record.address.wilaya} </Ant.Tag>{" "}
+        <Ant.Tag color="green"> {record.address.commune} </Ant.Tag>
+        <Ant.Tag color="green"> {record.address.daira} </Ant.Tag>{" "}
+      </h4>
+      <h4>
+        Coordinates : <Ant.Tag color="cyan"> {record.coordinates.lat} </Ant.Tag>{" "}
+        <Ant.Tag color="cyan"> {record.coordinates.lng} </Ant.Tag>
+      </h4>
+      <h4>Updated By: {record.updatedBy.fullName}</h4>
+      <h4>Updated At: {record.updatedAt.toString()}</h4>
+    </Ant.Card>
   );
 }

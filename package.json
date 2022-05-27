@@ -14,6 +14,7 @@
     "generate:types:win32": "cd microservices/admin && npm run generate"
   },
   "dependencies": {
+    "ant-responsive-table": "^1.0.8",
     "google-map-react": "^2.1.10",
     "google-maps-api-loader": "^1.1.1",
     "react-geocode": "^0.2.3",
