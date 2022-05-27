@@ -4,3 +4,9 @@ export * from "./AdminTopHeader";
 export * from "./NotAuthorized";
 export * from "./Loading";
 export * from "./NotFound";
+export * from "./AdminLayout";
+export * from "./AdminLogo";
+export * from "./AdminFooter";
+
+
+

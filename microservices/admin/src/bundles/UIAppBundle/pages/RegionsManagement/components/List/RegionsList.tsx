@@ -64,7 +64,7 @@ export function RegionsList() {
                 const value = (e.target as HTMLInputElement).value;
                 api.setFilters({
                   // Customise your search filters!
-                  title: new RegExp(`${value}`, "i"),
+                  title: new RegExp(`^${value}`, "i"),
                 });
               }}
             />

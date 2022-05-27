@@ -42,7 +42,7 @@ export function DashboardStats(props: {
   }, []);
 
   return (
-    <Card title={collection.getName()}>
+    <Card title={"collection.getName()"}>
       <h1>Total: {count}</h1>
     </Card>
   );

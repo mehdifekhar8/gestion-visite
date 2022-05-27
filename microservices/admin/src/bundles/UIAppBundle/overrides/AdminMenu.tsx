@@ -32,7 +32,7 @@ export function AdminMenu() {
       return guardian.hasRole(item.roles);
     }
 
-    return true;
+    return true; 
   });
 
   // Detect which paths are active based on their logic

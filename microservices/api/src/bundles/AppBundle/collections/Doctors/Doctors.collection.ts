@@ -23,8 +23,10 @@ export class DoctorsCollection extends Collection<Doctor> {
 
   // Create an array of indexes
   static indexes = [
+
     { key: { isDeleted: 1 } },
     { key: { createdAt: 1 } },
     { key: { createdBy: 1 } },
+    { key: { "$**": "text" } },
   ];
 }

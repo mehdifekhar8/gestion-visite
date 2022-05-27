@@ -16,7 +16,7 @@ type Props = {
   }[];
   minHeight?: string;
   width?: string;
-};
+} &any;
 
 type Locations = {
   _id: string;
