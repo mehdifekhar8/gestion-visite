@@ -6,11 +6,18 @@ import {
 } from "@bluelibs/x-ui";
 import { useEffect, useState, useMemo } from "react";
 import { RotationsAntTableSmart } from "./RotationsTableSmart";
-import { PlusOutlined, FilterOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  FilterOutlined,
+  SettingOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons";
 import * as Ant from "antd";
 import { Routes } from "@bundles/UIAppBundle";
 import { features } from "../../config/features";
 import { RotationsListFilters } from "./RotationsListFilters";
+import Meta from "antd/lib/card/Meta";
 
 export function RotationsList() {
   const UIComponents = useUIComponents();
@@ -23,7 +30,8 @@ export function RotationsList() {
       api.setFlexibleFilters(filters);
     };
   }, []);
-
+  const data = api.getTableProps().dataSource;
+  console.log(data);
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -72,6 +80,30 @@ export function RotationsList() {
             />
             <Ant.Table {...api.getTableProps()} />
           </div>
+
+          <Ant.List
+            grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 3, xl: 3, xxl: 4 }}
+            dataSource={[...data]}
+            renderItem={(item) => (
+              <Ant.List.Item>
+                <Ant.Card
+                  title={item.dateIntervale}
+                  style={{ marginTop: 16 }}
+                  actions={[
+                    <SettingOutlined key="setting" />,
+                    <EditOutlined key="edit" />,
+                    <EllipsisOutlined key="ellipsis" />,
+                  ]}
+                >
+                  <p>hey</p>
+                  <p>hey</p>
+                  <p>hey</p>
+                  <p>hey</p>
+                  <p>hey</p>
+                </Ant.Card>
+              </Ant.List.Item>
+            )}
+          />
         </Provider>
       </Ant.Layout.Content>
     </UIComponents.AdminLayout>

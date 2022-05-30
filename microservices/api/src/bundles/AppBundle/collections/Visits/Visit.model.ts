@@ -8,3 +8,4 @@ export { Visit as VisitProfile } from "./Visit.model.base";
 export class Visit extends BaseVisit {
   // You can extend the base here
 }
+
