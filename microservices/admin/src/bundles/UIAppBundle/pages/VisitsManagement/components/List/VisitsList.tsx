@@ -23,7 +23,6 @@ export function VisitsList() {
       api.setFlexibleFilters(filters);
     };
   }, []);
-
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader

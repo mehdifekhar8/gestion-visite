@@ -24,13 +24,18 @@ export default {
           const currentUser = await usersCollection.findOne({
             _id: ctx.userId,
           });
-
+           console.log("enter")
           const result = await visitsCollection.queryGraphQL(info, {
             embody(body, getArguments): any {
+                
               const visitsArgument = getArguments("visits");
-          
+              console.log(args);
+              
               if (currentUser.roles.includes(UserRole.ADMIN)) {
-                body.$ = { ...body.$ };
+                body.$ = {
+                  ...body.$,
+                  filters: { ...body.$.filters, ...args.query.filters },
+                };
               } else if (
                 currentUser.roles.includes(UserRole.REGION_ADMINISTRATOR)
               ) {
@@ -58,10 +63,10 @@ export default {
               } else if (currentUser.roles.includes(UserRole.DELEGATE)) {
                 body.$ = {
                   ...body.$,
-                 filters :{... body.$.filters,createdById:ctx.userId}
+                  filters: { ...body.$.filters, createdById: ctx.userId },
                 };
               }
-              console.log(body);
+              console.log(body.$);
             },
           });
           console.log(result.length);
