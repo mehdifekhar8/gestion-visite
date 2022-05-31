@@ -8,6 +8,7 @@ import { useState } from "react";
 export class VisitCreateForm extends BaseVisitCreateForm {
   build() {
     super.build();
+    this.remove("locationValidation")
     this.update("coordinates", {
       label: "Show Map",
       required: false,

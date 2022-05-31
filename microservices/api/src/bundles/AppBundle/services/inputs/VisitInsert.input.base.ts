@@ -25,8 +25,8 @@ export class VisitInsertInput {
   @Is(a.string().required())
   information2: string;
 
-  @Is(a.number().required())
-  locationValidation: number;
+  @Is(a.number().nullable())
+  locationValidation?: number;
 
   @Is(an.objectId().nullable())
   rotationId?: ObjectId;

@@ -56,8 +56,8 @@ export class Visit {
   @Is(a.boolean().nullable())
   isDeleted?: boolean;
 
-  @Is(a.number().required())
-  locationValidation: number;
+  @Is(a.number().nullable())
+  locationValidation?: number;
 
   rotation?: Rotation;
 

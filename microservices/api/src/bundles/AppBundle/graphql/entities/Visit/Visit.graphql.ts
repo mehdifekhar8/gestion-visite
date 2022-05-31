@@ -21,7 +21,7 @@ export default /* GraphQL */ `
     doctorId: ObjectId!
     information: String!
     information2: String!
-    locationValidation: Float!
+    locationValidation: Float
     rotation: Rotation
     rotationId: ObjectId
 

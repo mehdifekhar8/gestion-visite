@@ -9,6 +9,7 @@ import {
 } from "@bundles/AppBundle/collections";
 import { ISecureOptions, lookup, query } from "@bluelibs/nova";
 import { ObjectId } from "mongodb";
+import { CreateVisitService } from "@bundles/AppBundle/services/CreateVisit.service";
 
 export default {
   Query: [
@@ -82,7 +83,13 @@ export default {
       VisitsInsertOne: [
         X.ToModel(VisitInsertInput, { field: "document" }),
         X.Validate({ field: "document" }),
-        X.ToDocumentInsert(VisitsCollection),
+        async (_, args, ctx) => {
+          const { container } = ctx;
+          const insertVisit = container.get(CreateVisitService);
+          const result = await insertVisit.createNewVisit(args, ctx);
+          console.log(result);
+          return result.insertedId;
+        },
         X.ToNovaByResultID(VisitsCollection),
       ],
       VisitsUpdateOne: [

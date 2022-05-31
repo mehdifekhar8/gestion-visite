@@ -67,7 +67,6 @@ export class VisitEditForm extends XForm {
         id: "locationValidation",
         label: t("management.visits.fields.locationValidation"),
         name: ["locationValidation"],
-        required: true,
         component: Ant.InputNumber,
       },
 

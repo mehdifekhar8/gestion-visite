@@ -36,6 +36,7 @@ export const Visits = collection({
     field({
       id: "locationValidation",
       type: field.types.FLOAT,
+      isRequired:false
     }),
   ],
   relations: [
