@@ -10,13 +10,13 @@ export const dateIntervale: IReducerOption = {
       return `${
         parent.from.getFullYear() +
         "/" +
-        parent.from.getMonth() +
+        (parseInt(parent.from.getMonth()) + 1).toString() +
         "/" +
         parent.from.getDate()
       } => ${
         parent.to.getFullYear() +
         "/" +
-        parent.to.getMonth() +
+        (parseInt(parent.to.getMonth()) + 1).toString() +
         "/" +
         parent.to.getDate()
       }`;

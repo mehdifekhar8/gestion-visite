@@ -6,6 +6,7 @@ import {
   VISITS_CREATE as BASE_VISITS_CREATE,
   VISITS_EDIT as BASE_VISITS_EDIT,
   VISITS_VIEW as BASE_VISITS_VIEW,
+  VISITS_DOCTOR as BASE_VISITS_DOCTOR,
 } from "./config/routes";
 
 export const VISITS_LIST: IRoute = {
@@ -22,4 +23,7 @@ export const VISITS_EDIT: IRoute = {
 
 export const VISITS_VIEW: IRoute = {
   ...BASE_VISITS_VIEW,
+};
+export const VISITS_DOCTOR: IRoute = {
+  ...BASE_VISITS_DOCTOR,
 };
