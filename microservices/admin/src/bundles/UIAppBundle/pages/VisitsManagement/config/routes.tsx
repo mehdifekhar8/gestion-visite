@@ -22,8 +22,8 @@ export const VISITS_CREATE: IRoute = {
   path: "/admin/visits/create",
   component: VisitsCreate,
 };
-export const VISITS_DOCTOR: IRoute<{ id: string }> = {
-  path: "/admin/visits/create/:id",
+export const VISITS_DOCTOR: IRoute<{ id: string,rotationId: string }> = {
+  path: "/admin/visits/create/:id/:rotationId",
   component: VisitsCreate,
 };
 

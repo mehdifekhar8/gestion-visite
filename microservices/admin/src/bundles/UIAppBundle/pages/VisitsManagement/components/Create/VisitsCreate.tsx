@@ -13,7 +13,7 @@ const formTailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-export function VisitsCreate(props: { id?: string }) {
+export function VisitsCreate(props: { id?: string, rotationId:string }) {
   const UIComponents = useUIComponents();
   const t = useTranslate();
   const form = use(VisitCreateForm, { transient: true });
@@ -30,7 +30,7 @@ export function VisitsCreate(props: { id?: string }) {
         <Ant.Form
           {...formLayout}
           requiredMark="optional"
-          initialValues={props.id  && {doctorId:props.id}}
+          initialValues={props.id  && {doctorId:props.id , rotationId:props.rotationId}}
           onFinish={(document) => form.onSubmit(document)}
         >
           {form.render()}
