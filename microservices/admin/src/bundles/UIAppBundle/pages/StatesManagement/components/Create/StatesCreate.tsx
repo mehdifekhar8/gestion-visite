@@ -5,7 +5,7 @@ import { StateCreateForm } from "../../config/StateCreateForm";
 import { State, StatesCollection } from "@bundles/UIAppBundle/collections";
 
 const formLayout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 6 },
   wrapperCol: { span: 16 },
 };
 
