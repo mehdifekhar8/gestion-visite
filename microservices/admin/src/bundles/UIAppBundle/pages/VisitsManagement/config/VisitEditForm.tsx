@@ -7,7 +7,9 @@ import { Visit } from "@bundles/UIAppBundle/collections";
 export class VisitEditForm extends BaseVisitEditForm {
   build() {
     super.build();
-
+    if(process.env.MODE!="advanced") {
+      this.remove("rotationId")
+    }
     // Perform additional modifications such as updating rendering functions, labels, description
   }
 

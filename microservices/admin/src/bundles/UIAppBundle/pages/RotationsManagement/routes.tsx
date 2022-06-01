@@ -11,20 +11,18 @@ import { UserRole } from "@root/api.types";
 
 export const ROTATIONS_LIST: IRoute = {
   ...BASE_ROTATIONS_LIST,
-  
 };
 
 export const ROTATIONS_CREATE: IRoute = {
   ...BASE_ROTATIONS_CREATE,
-  roles: [UserRole.ADMIN,UserRole.REGION_ADMINISTRATOR],
+  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };
 
 export const ROTATIONS_EDIT: IRoute = {
   ...BASE_ROTATIONS_EDIT,
-  roles: [UserRole.ADMIN,UserRole.REGION_ADMINISTRATOR],
+  roles: [UserRole.ADMIN, UserRole.REGION_ADMINISTRATOR],
 };
 
 export const ROTATIONS_VIEW: IRoute = {
   ...BASE_ROTATIONS_VIEW,
-  
 };

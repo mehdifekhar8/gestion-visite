@@ -25,6 +25,9 @@ export class VisitViewer extends BaseVisitViewer {
         return <this.UIComponents.AdminListItemRenderer {...props} />;
       },
      })
+     if(process.env.MODE!="advanced") {
+      this.remove("rotationId")
+    }
     // Perform additional modifications such as updating rendering functions, labels, description
   }
 
