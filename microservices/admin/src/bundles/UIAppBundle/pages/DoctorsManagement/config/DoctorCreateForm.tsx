@@ -14,20 +14,37 @@ export class DoctorCreateForm extends BaseDoctorCreateForm {
   build() {
     super.build();
     const guardian = useGuardian();
+    this.update("regionId", {
+      order:2
+    })
+    if(!guardian.hasRole("ADMIN"))  this.update("regionId", {
+      required:true
+     })
     if (
       !(guardian.hasRole("ADMIN") || guardian.hasRole("REGION_ADMINISTRATOR"))
     ) {
       this.remove("regionId");
     }
+   
 
     this.remove("address");
+    this.update("profile", {
+      order:0
+    })
+    this.update("phone", {
+      order:1
+    })
+   
     this.update("coordinates", {
+      order:5,
       render: (props: { onChange: () => void; value: string } & any) => (
         <Ant.Form.Item name="body" {...props}>
           <AddMarker onChange={props.onChange}></AddMarker>
         </Ant.Form.Item>
       ),
     });
+   this.remove("isEnabled")
+      
 
     // Perform additional modifications such as updating rendering functions, labels, description
   }
@@ -48,6 +65,7 @@ export class DoctorCreateForm extends BaseDoctorCreateForm {
          daira: address[address.length - 3].long_name,
          commune: address[address.length - 4].long_name,
        };
+       document.isEnabled =true
        this.collection
       .insertOne(document)
       .then(({ _id }) => {

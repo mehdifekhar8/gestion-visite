@@ -32,8 +32,6 @@ export function DoctorsList() {
   const { TabPane } = Ant.Tabs;
   const [doctors, setDoctors] = useState([]);
 
-  console.log("data")
-  console.log()
 
   useEffect(() => {
     doctorsCollection
