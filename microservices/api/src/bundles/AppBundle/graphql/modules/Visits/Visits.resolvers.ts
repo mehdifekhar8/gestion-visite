@@ -9,6 +9,7 @@ import {
 } from "@bundles/AppBundle/collections";
 import { ISecureOptions, lookup, query } from "@bluelibs/nova";
 import { ObjectId } from "mongodb";
+import { CreateVisitService } from "@bundles/AppBundle/services/CreateVisit.service";
 
 export default {
   Query: [
@@ -24,13 +25,9 @@ export default {
           const currentUser = await usersCollection.findOne({
             _id: ctx.userId,
           });
-           console.log("enter")
+          console.log("enter");
           const result = await visitsCollection.queryGraphQL(info, {
             embody(body, getArguments): any {
-                
-              const visitsArgument = getArguments("visits");
-              console.log(args);
-              
               if (currentUser.roles.includes(UserRole.ADMIN)) {
                 body.$ = {
                   ...body.$,
@@ -56,6 +53,7 @@ export default {
                     {
                       $match: {
                         "doctor.isEnabled": true,
+                        ...args.query.filters,
                       },
                     },
                   ],
@@ -63,7 +61,7 @@ export default {
               } else if (currentUser.roles.includes(UserRole.DELEGATE)) {
                 body.$ = {
                   ...body.$,
-                  filters: { ...body.$.filters, createdById: ctx.userId },
+                  filters: { ...body.$.filters, createdById: ctx.userId ,  ...args.query.filters},
                 };
               }
               console.log(body.$);
@@ -82,7 +80,13 @@ export default {
       VisitsInsertOne: [
         X.ToModel(VisitInsertInput, { field: "document" }),
         X.Validate({ field: "document" }),
-        X.ToDocumentInsert(VisitsCollection),
+        async (_, args, ctx) => {
+          const { container } = ctx;
+          const insertVisit = container.get(CreateVisitService);
+          const result = await insertVisit.createNewVisit(args, ctx);
+          console.log(result);
+          return result.insertedId;
+        },
         X.ToNovaByResultID(VisitsCollection),
       ],
       VisitsUpdateOne: [

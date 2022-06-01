@@ -14,6 +14,7 @@ import { Fragment } from "react";
 export class UserCreateForm extends BaseUserCreateForm {
   build() {
     const { t } = this.i18n;
+    const guardian = useGuardian();
 
     super.build();
     this.add([
@@ -23,6 +24,7 @@ export class UserCreateForm extends BaseUserCreateForm {
         name: ["email"],
         required: true,
         component: Ant.Input,
+        order: 3,
       },
       {
         id: "password",
@@ -30,6 +32,7 @@ export class UserCreateForm extends BaseUserCreateForm {
         name: ["password"],
         required: true,
         component: Ant.Input,
+        order: 4,
       },
     ]);
     this.update("roles", {
@@ -64,9 +67,15 @@ export class UserCreateForm extends BaseUserCreateForm {
       },
     });
     this.remove("isEnabled");
+    {
+      !guardian.hasRole("ADMIN") && this.update("regionId", { required: true });
+    }
+    this.update("regionId", { order: 2 });
+    this.update("roles", { order: 1 });
+    this.update("profile", { order: 0 });
+
+    this.elements.sort((a, b) => Number(a.order) - Number(b.order));
 
     // Perform additional modifications such as updating rendering functions, labels, description
-    
   }
-
 }

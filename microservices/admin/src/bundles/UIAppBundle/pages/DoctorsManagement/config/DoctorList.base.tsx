@@ -95,7 +95,6 @@ export class DoctorList extends XList<Doctor> {
         title: t("management.doctors.fields.phone"),
         key: "management.doctors.fields.phone",
         dataIndex: ["phone"],
-      
         sorter: true,
         render: (value, model) => {
           const props = {

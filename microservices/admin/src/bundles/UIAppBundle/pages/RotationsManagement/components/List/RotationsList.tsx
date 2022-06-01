@@ -16,6 +16,7 @@ import {
   EyeOutlined,
   DeleteOutlined,
   AreaChartOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 import * as Ant from "antd";
 import { Routes } from "@bundles/UIAppBundle";
@@ -28,8 +29,7 @@ import {
 } from "@bundles/UIAppBundle/collections";
 import { VisitsAntTableSmart } from "./VisitsTableSmart";
 import { ObjectId } from "@bluelibs/ejson";
-
-
+import { Link } from "react-router-dom";
 
 export function RotationsList() {
   const UIComponents = useUIComponents();
@@ -44,7 +44,9 @@ export function RotationsList() {
     };
   }, []);
   const [result, setResult] = useState();
-  const [selectedRotation, setSelectedRotation] = useState<Rotation>();
+  const [selectedRotation, setSelectedRotation] = useState<
+    Rotation | undefined
+  >();
 
   const CheckIfCurrent = (currentDate, minDate, maxDate) => {
     if (currentDate > minDate && currentDate < maxDate) {
@@ -54,11 +56,14 @@ export function RotationsList() {
     }
   };
   useEffect(() => {
-    if (selectedRotation) generateVisitedList(selectedRotation);
-  }, [apiVisits.getTableProps()]);
+    if (selectedRotation) {
+      generateVisitedList(selectedRotation);
+    }
+  }, [apiVisits.getTableProps().dataSource]);
   const collection = use(RotationsCollection);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const generateVisitedList = (rotation) => {
+    console.log(apiVisits.getTableProps().dataSource)
     setResult(
       rotation.doctorsList
         .filter(
@@ -68,7 +73,7 @@ export function RotationsList() {
               .dataSource.some((o2) => o1._id === o2.doctor._id)
         )
         .map((val) => {
-          return { ...val, isVisited: false };
+          return { ...val, isVisited: false, rotationId: rotation._id };
         })
         .concat(
           apiVisits.getTableProps().dataSource.map((val) => {
@@ -76,6 +81,8 @@ export function RotationsList() {
               _id: val.doctor._id,
               fullName: val.doctor.fullName,
               isVisited: true,
+              visitId: val._id,
+              rotationId: rotation._id,
             };
           })
         )
@@ -212,8 +219,14 @@ export function RotationsList() {
 
                         <AreaChartOutlined
                           onClick={() => {
+                           
+                            apiVisits.setFilters({
+                              $and: [
+                                { createdById: item.userId },
+                                { rotationId: new ObjectId(item._id ) },
+                              ],
+                            });
                             setSelectedRotation(item);
-                            apiVisits.setFilters({ createdById: item.userId });
                             showModal();
                           }}
                           key="viewDetail"
@@ -262,17 +275,13 @@ export function RotationsList() {
         dataIndex: "fullName",
       },
     };
-    return (
-      <UIComponents.AdminListItemRenderer
-        {...props}
-        key={idx} />
-    );
+    return <UIComponents.AdminListItemRenderer {...props} key={idx} />;
   }
-  
 }
 
-
 function InformationModal(props) {
+  const router = useRouter();
+
   return (
     <Ant.Modal
       title="Visits Status "
@@ -290,16 +299,51 @@ function InformationModal(props) {
           _id: string;
           fullName: string;
           isVisited: boolean;
+          visitId?: string;
+          rotationId: string;
         }) => {
-          console.log(item);
           return (
             <Ant.List.Item>
-              <Ant.Tag color={"green"}>{item.fullName} </Ant.Tag>
+              <div style={{ minWidth: "200px" }}>
+                <Ant.Tag color={"green"}>{item.fullName} </Ant.Tag>
+              </div>
               {item.isVisited ? (
-                <Ant.Tag color={"green"}>Visited</Ant.Tag>
+                <Link
+                  key="edit"
+                  to={router.path(Routes.VISITS_VIEW, {
+                    params: { id: item.visitId },
+                  })}
+                >
+                  <Ant.Button type="ghost" icon={<EyeOutlined />}>
+                    {" "}
+                    View{" "}
+                  </Ant.Button>
+                </Link>
               ) : (
-                <Ant.Tag color={"red"}>NotVisited</Ant.Tag>
+                <Link
+                  key="edit"
+                  to={router.path(Routes.VISITS_DOCTOR, {
+                    params: { id: item._id, rotationId: item.rotationId },
+                  })}
+                >
+                  <Ant.Button type="ghost" icon={<PlusCircleOutlined />}>
+                    {" "}
+                    Visit
+                  </Ant.Button>{" "}
+                </Link>
               )}
+
+              <div style={{ minWidth: "100px" }}>
+                {item.isVisited ? (
+                  <>
+                    <Ant.Tag color={"green"}>Visited</Ant.Tag>
+                  </>
+                ) : (
+                  <>
+                    <Ant.Tag color={"red"}>NotVisited</Ant.Tag>
+                  </>
+                )}
+              </div>
             </Ant.List.Item>
           );
         }}

@@ -22,10 +22,6 @@ export const VISITS_CREATE: IRoute = {
   path: "/admin/visits/create",
   component: VisitsCreate,
 };
-export const VISITS_DOCTOR: IRoute<{ id: string }> = {
-  path: "/admin/visits/create/:id",
-  component: VisitsCreate,
-};
 
 export const VISITS_EDIT: IRoute<{ id: string }> = {
   path: "/admin/visits/:id/edit",
@@ -35,4 +31,9 @@ export const VISITS_EDIT: IRoute<{ id: string }> = {
 export const VISITS_VIEW: IRoute<{ id: string }> = {
   path: "/admin/visits/:id/view",
   component: VisitsView,
+};
+
+export const VISITS_DOCTOR: IRoute<{ id: string; rotationId: string }> = {
+  path: "/admin/visits/create/:id/:rotationId",
+  component: VisitsCreate,
 };
