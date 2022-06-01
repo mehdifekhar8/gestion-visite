@@ -104,7 +104,8 @@ function ItemRender(props: ItemRenderProps) {
   const { item, t } = props;
 
   if (typeof item.label === "string") {
-    return <span>{t(item.label)}</span>;
+    return <span>{ item.label =="Dashboard"  ? item.label: t(item.label)}</span>;
+    //you have removed translation for dashboard
   }
 
   return React.createElement(item.label);

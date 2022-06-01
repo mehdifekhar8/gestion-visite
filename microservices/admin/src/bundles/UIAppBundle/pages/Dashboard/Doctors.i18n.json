@@ -55,7 +55,7 @@
         "edit_confirmation": "You successfully edited the Doctor"
       },
       "dashboard": {
-           
+        "dashboard":"Dashboard"
       }
     }
   }
