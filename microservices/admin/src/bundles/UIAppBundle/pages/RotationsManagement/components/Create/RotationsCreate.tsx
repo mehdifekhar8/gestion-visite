@@ -8,8 +8,8 @@ import {
 } from "@bundles/UIAppBundle/collections";
 
 const formLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: { xs: { span: 24 }, sm: { span: 6 }, md: { span: 6 }, lg: { span: 6 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 16 }, md: { span: 16 }, lg: { span: 16 } }
 };
 
 const formTailLayout = {
@@ -32,7 +32,7 @@ export function RotationsCreate() {
         <Ant.Form
           {...formLayout}
           requiredMark="optional"
-          onFinish={(document) => form.onSubmit(document)}
+          onFinish={(document) => form.onCustomSubmit(document)}
         >
           {form.render()}
           <Ant.Form.Item {...formTailLayout}>
