@@ -8,12 +8,13 @@ import { SmileOutlined } from "@ant-design/icons";
 import { Routes } from "@bundles/UIAppBundle";
 
 const formLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: { xs: { span: 24 }, sm: { span: 8 }, md: { span: 8 }, lg: { span: 6 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 24 }, md: { span: 14 }, lg: { span: 16 } }
 };
 
 const formTailLayout = {
   wrapperCol: { offset: 8, span: 16 },
+  
 };
 
 export function UsersCreate() {
@@ -24,7 +25,6 @@ export function UsersCreate() {
   const t = useTranslate();
   const form = use(UserCreateForm, { transient: true });
   form.build();
-  
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -33,6 +33,8 @@ export function UsersCreate() {
       />
       <Ant.Card>
         <Ant.Form
+         // layout="inline"
+
           {...formLayout}
           requiredMark="optional"
           onFinish={(document) => {
@@ -60,6 +62,7 @@ export function UsersCreate() {
               });
           }}
         >
+       
           {form.render()}
           <Ant.Form.Item {...formTailLayout}>
             <Ant.Button type="primary" htmlType="submit">

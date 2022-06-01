@@ -61,7 +61,7 @@ export default {
               } else if (currentUser.roles.includes(UserRole.DELEGATE)) {
                 body.$ = {
                   ...body.$,
-                  filters: { ...body.$.filters, createdById: ctx.userId ,  ...args.query.filters,},
+                  filters: { ...body.$.filters, createdById: ctx.userId ,  ...args.query.filters},
                 };
               }
               console.log(body.$);
