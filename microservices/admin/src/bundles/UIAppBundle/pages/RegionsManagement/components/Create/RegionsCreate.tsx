@@ -5,8 +5,8 @@ import { RegionCreateForm } from "../../config/RegionCreateForm";
 import { Region, RegionsCollection } from "@bundles/UIAppBundle/collections";
 
 const formLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: { xs: { span: 24 }, sm: { span: 8 }, md: { span: 8 }, lg: { span: 6 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 24 }, md: { span: 14 }, lg: { span: 16 } }
 };
 
 const formTailLayout = {
