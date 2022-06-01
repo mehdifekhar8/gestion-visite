@@ -828,7 +828,7 @@ export type Visit = {
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
   information2: Scalars['String'];
-  locationValidation: Scalars['Float'];
+  locationValidation?: Maybe<Scalars['Float']>;
   rotation?: Maybe<Rotation>;
   rotationId?: Maybe<Scalars['ObjectId']>;
   /** Represents the last time when the object was updated */
@@ -855,7 +855,7 @@ export type VisitInsertInput = {
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
   information2: Scalars['String'];
-  locationValidation: Scalars['Float'];
+  locationValidation?: Maybe<Scalars['Float']>;
   rotationId?: Maybe<Scalars['ObjectId']>;
 };
 

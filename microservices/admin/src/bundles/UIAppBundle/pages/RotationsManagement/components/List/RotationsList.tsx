@@ -63,6 +63,7 @@ export function RotationsList() {
   const collection = use(RotationsCollection);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const generateVisitedList = (rotation) => {
+    console.log(apiVisits.getTableProps().dataSource)
     setResult(
       rotation.doctorsList
         .filter(
@@ -72,7 +73,7 @@ export function RotationsList() {
               .dataSource.some((o2) => o1._id === o2.doctor._id)
         )
         .map((val) => {
-          return { ...val, isVisited: false, rotationId:rotation._id };
+          return { ...val, isVisited: false, rotationId: rotation._id };
         })
         .concat(
           apiVisits.getTableProps().dataSource.map((val) => {
@@ -81,7 +82,7 @@ export function RotationsList() {
               fullName: val.doctor.fullName,
               isVisited: true,
               visitId: val._id,
-              rotationId:rotation._id
+              rotationId: rotation._id,
             };
           })
         )
@@ -218,8 +219,14 @@ export function RotationsList() {
 
                         <AreaChartOutlined
                           onClick={() => {
+                           
+                            apiVisits.setFilters({
+                              $and: [
+                                { createdById: item.userId },
+                                { rotationId: new ObjectId(item._id ) },
+                              ],
+                            });
                             setSelectedRotation(item);
-                            apiVisits.setFilters({ createdById: item.userId , rotationId: new  ObjectId(item._id)} );
                             showModal();
                           }}
                           key="viewDetail"
@@ -293,9 +300,8 @@ function InformationModal(props) {
           fullName: string;
           isVisited: boolean;
           visitId?: string;
-          rotationId:string
+          rotationId: string;
         }) => {
-          console.log(item);
           return (
             <Ant.List.Item>
               <div style={{ minWidth: "200px" }}>
@@ -317,7 +323,7 @@ function InformationModal(props) {
                 <Link
                   key="edit"
                   to={router.path(Routes.VISITS_DOCTOR, {
-                    params: { id: item._id,rotationId:item.rotationId  },
+                    params: { id: item._id, rotationId: item.rotationId },
                   })}
                 >
                   <Ant.Button type="ghost" icon={<PlusCircleOutlined />}>
