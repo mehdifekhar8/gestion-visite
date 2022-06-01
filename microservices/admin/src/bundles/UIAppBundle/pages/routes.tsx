@@ -5,7 +5,6 @@ export * from "./UsersManagement/routes";
 export * from "./Dashboard/routes";
 export * from "./Authentication/routes";
 export * from "./DoctorsManagement/routes";
-
 export * from "./RegionsManagement/routes";
 export * from "./VisitsManagement/routes";
 export * from "./StatesManagement/routes";
