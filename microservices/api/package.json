@@ -24,6 +24,9 @@
     "prepublishOnly": "npm run compile",
     "generate:docs": "typedoc ./src/startup/index.ts --exclude ./src/__tests__ --out typeDocs --tsconfig tsconfig.json"
   },
+  "engines": {
+    "node": "16.13.1"
+  },
   "dependencies": {
     "@babel/runtime": "7.12.5",
     "@bluelibs/apollo-bundle": "^1.0.0",
