@@ -16,20 +16,35 @@ import { RotationType } from "@root/api.types";
 export class RotationCreateForm extends BaseRotationCreateForm {
   build() {
     super.build();
-  this.update("from", {
- initialValue: new Date()
-  })
-  this.update("to", {
-    initialValue: new Date()
-     })
-     this.remove("isDone")
-     this.remove("type")
+    this.update("from", {
+      initialValue: new Date(),
+    });
+    this.update("to", {
+      initialValue: new Date(),
+    });
+    this.remove("isDone");
+    this.remove("type");
+    this.update("doctorsListIds", {
+      render: (props) => (
+        <Ant.Form.Item {...props}>
+          <this.UIComponents.RemoteSelect
+            collectionClass={DoctorsCollection}
+            field="fullName"
+            filterOption={(input, option) =>
+              (option.children as unknown as string).includes(input)
+            }
+            required={true}
+            mode="multiple"
+          />
+        </Ant.Form.Item>
+      ),
+    });
     // Perform additional modifications such as updating rendering functions, labels, description
   }
   onCustomSubmit(document: Partial<Rotation>): Promise<void> {
     const { t } = this.i18n;
-  document.isDone = false
-  document.type = [RotationType.GLOBAL]
+    document.isDone = false;
+    document.type = [RotationType.GLOBAL];
     return this.collection
       .insertOne(document)
       .then(({ _id }) => {
