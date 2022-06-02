@@ -30,6 +30,9 @@ import {
 import { VisitsAntTableSmart } from "./VisitsTableSmart";
 import { ObjectId } from "@bluelibs/ejson";
 import { Link } from "react-router-dom";
+import { RotationsEdit } from "../Edit/RotationsEdit";
+import { RotationList } from "../../config/RotationList";
+import { RotationEditForm } from "../../config/RotationEditForm";
 
 export function RotationsList() {
   const UIComponents = useUIComponents();
@@ -43,10 +46,11 @@ export function RotationsList() {
       api.setFlexibleFilters(filters);
     };
   }, []);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState([]);
   const [selectedRotation, setSelectedRotation] = useState<
     Rotation | undefined
   >();
+  const rotationsCollection = use(RotationsCollection);
 
   const CheckIfCurrent = (currentDate, minDate, maxDate) => {
     if (currentDate > minDate && currentDate < maxDate) {
@@ -63,7 +67,6 @@ export function RotationsList() {
   const collection = use(RotationsCollection);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const generateVisitedList = (rotation) => {
-    console.log(apiVisits.getTableProps().dataSource)
     setResult(
       rotation.doctorsList
         .filter(
@@ -219,11 +222,10 @@ export function RotationsList() {
 
                         <AreaChartOutlined
                           onClick={() => {
-                           
                             apiVisits.setFilters({
                               $and: [
                                 { createdById: item.userId },
-                                { rotationId: new ObjectId(item._id ) },
+                                { rotationId: new ObjectId(item._id) },
                               ],
                             });
                             setSelectedRotation(item);
@@ -237,14 +239,7 @@ export function RotationsList() {
                         Delegate :{" "}
                         <Ant.Tag color={"green"}>{item.user.fullName}</Ant.Tag>{" "}
                       </h4>
-                      <h4>
-                        Is Done :{" "}
-                        {item.isDone ? (
-                          <Ant.Tag color={"green"}>true</Ant.Tag>
-                        ) : (
-                          <Ant.Tag color={"red"}>false</Ant.Tag>
-                        )}
-                      </h4>
+
                       <h4>
                         Doctors List :{" "}
                         {item.doctorsList &&
