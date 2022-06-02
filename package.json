@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "blueprint:generate": "ts-node blueprint/index.ts",
-    "start":"cd microservices/api ; npm run start:dev  npm run generate:types; cd microservices/admin ; npm run start:dev ",
+    "start":"npm run start:api ; start:admin;",
     "start:api": "run-script-os",
     "start:admin": "run-script-os",
     "generate:types": "run-script-os",
