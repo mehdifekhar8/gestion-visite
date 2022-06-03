@@ -2,6 +2,8 @@ import * as React from "react";
 import { Layout, PageHeader } from "antd";
 import { useState } from "react";
 import { useUIComponents } from "@bluelibs/x-ui";
+import useWindowDimensions from "../components/ViewPort/ViewPort";
+import MobileMenu from "../components/Mobile/MobileMenu";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -14,21 +16,24 @@ export function AdminLayout(props: AdminLayoutProps) {
   const protect = props.protect === undefined ? true : props.protect;
   const [isCollapsed, setIsCollapsed] = useState(false);
   const Components = useUIComponents();
+  const { height, width } = useWindowDimensions();
 
   const content = (
     <Layout style={{ minHeight: "100vh" }} className="x-ui-admin">
-      <Sider
-        breakpoint="md"
-        theme={"dark"}
-        collapsible
-        collapsed={isCollapsed}
-        onCollapse={(collapsed) => setIsCollapsed(collapsed)}
-      >
-        <div className="logo">
-          <Components.AdminLogo />
-        </div>
-        <Components.AdminMenu />
-      </Sider>
+      {width > 900 && (
+        <Sider
+          breakpoint="md"
+          theme={"dark"}
+          collapsible
+          collapsed={isCollapsed}
+          onCollapse={(collapsed) => setIsCollapsed(collapsed)}
+        >
+          <div className="logo">
+            <Components.AdminLogo />
+          </div>
+          <Components.AdminMenu />
+        </Sider>
+      )}
       <Layout className="x-ui-admin-layout">
         <Header className="x-ui-admin-header">
           <Components.AdminTopHeader />
@@ -36,11 +41,12 @@ export function AdminLayout(props: AdminLayoutProps) {
         <Content className="x-ui-admin-content">
           <Components.AdminContent>{props.children}</Components.AdminContent>
         </Content>
-        <Footer className="x-ui-admin-footer">
-            
-          <Components.AdminFooter />
-        </Footer>
+       
       </Layout>
+      {width < 900  && 
+        <Header className="x-ui-admin-header">
+       <MobileMenu></MobileMenu>
+        </Header> }
     </Layout>
   );
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "blueprint:generate": "ts-node blueprint/index.ts",
-    "start":"cd microservices/api ; npm run start:dev  npm run generate:types; cd microservices/admin ; npm run start:dev ",
+    "start": "npm run start:api ; start:admin;",
     "start:api": "run-script-os",
     "start:admin": "run-script-os",
     "generate:types": "run-script-os",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "ant-responsive-table": "^1.0.8",
+    "antd-mobile": "^5.13.1",
     "google-map-react": "^2.1.10",
     "google-maps-api-loader": "^1.1.1",
     "react-geocode": "^0.2.3",

@@ -7,6 +7,8 @@ export * from "./NotFound";
 export * from "./AdminLayout";
 export * from "./AdminLogo";
 export * from "./AdminFooter";
+export * from "./AdminContent";
+
 
 
 
