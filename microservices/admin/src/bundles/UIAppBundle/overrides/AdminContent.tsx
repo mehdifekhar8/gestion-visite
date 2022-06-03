@@ -16,10 +16,18 @@ const contentStyles = {
 
 export function AdminContent(props: AdminContentProps) {
   const UIComponents = useUIComponents();
-  const {height , width } = useWindowDimensions()
+  const { height, width } = useWindowDimensions();
   return (
     <UIComponents.ErrorBoundary>
-      <Content style={width < 900 ? {...contentStyles , height:height- 115 , overflow:"auto"} : contentStyles}>{props.children}</Content>
+      <Content
+        style={
+          width < 900
+            ? { ...contentStyles, height: height - 115, overflow: "auto" }
+            : contentStyles
+        }
+      >
+        {props.children}
+      </Content>
     </UIComponents.ErrorBoundary>
   );
 }
