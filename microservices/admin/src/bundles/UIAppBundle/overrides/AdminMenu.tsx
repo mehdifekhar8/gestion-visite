@@ -9,12 +9,15 @@ import {
   XRouter,
 } from "@bluelibs/x-ui";
 import { IMenuItemConfig, MenuService } from "@bluelibs/x-ui-admin";
+import useWindowDimensions from "../components/ViewPort/ViewPort";
 
 const AntdSubMenu = AntdMenu.SubMenu;
 
 type Translator = (key: string) => string;
 
 export function AdminMenu() {
+  const { height, width } = useWindowDimensions();
+
   const menuService = use(MenuService);
   const guardian = useGuardian();
   const router = useRouter();
@@ -42,10 +45,11 @@ export function AdminMenu() {
   return (
     <AntdMenu
       theme={"dark"}
-      mode="inline"
-      style={{ height: "100%" }}
+      mode={width > 900  ? "inline" :"horizontal"}
+     // style={{ height: "100%" }}
       defaultOpenKeys={selectedOrOpenKeys}
       defaultSelectedKeys={selectedOrOpenKeys}
+      inlineCollapsed={width > 900  ? true : false}
     >
       {/* Make sure that subitems are right under Menu or it will fail */}
       {items.map((item) => {
@@ -111,7 +115,7 @@ function ItemRender(props: ItemRenderProps) {
   return React.createElement(item.label);
 }
 
-function getSelectedKeys(items: IMenuItemConfig[], pathname: string) {
+export function getSelectedKeys(items: IMenuItemConfig[], pathname: string) {
   const selectedKeys = [];
 
   items.forEach((item) => {
