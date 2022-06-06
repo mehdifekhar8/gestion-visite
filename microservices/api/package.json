@@ -6,7 +6,7 @@
   "main": "dist/startup/index.js",
   "scripts": {
     "build": "ttsc",
-    "start": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/startup/index.js",
+    "start": "node dist/startup/index.js",
     "start:dev": "tsnd --respawn -r tsconfig-paths/register src/startup/index.ts",
     "start:watch:debug": "nodemon --watch 'dist' dist/startup/index.js --inspect",
     "watch": "tsc -w",
@@ -54,7 +54,7 @@
     "react-dom": "^17.0.1",
     "passport": "^0.4.1",
     "moment": "^2.29.1",
-    "mongodb": "4.2.2",
+    "mongodb": "4.3.0",
     "yup": "^0.32.0",
     "aws-sdk": "^2.948.0"
   },
