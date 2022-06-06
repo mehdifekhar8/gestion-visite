@@ -7,7 +7,9 @@ import { Routes } from "@bundles/UIAppBundle";
 import * as Ant from "antd";
 import {
   Visit,
+  UsersCollection,
   DoctorsCollection,
+  RotationsCollection,
   VisitsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -30,6 +32,45 @@ export class VisitEditForm extends XForm {
       },
 
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        name: ["information2"],
+        required: true,
+        component: Ant.Input,
+      },
+
+      {
+        id: "coordinates",
+        label: t("management.visits.fields.coordinates"),
+        name: ["coordinates"],
+        required: true,
+        nest: [
+          {
+            id: "lat",
+            label: t("management.visits.fields.coordinates.lat"),
+            name: ["coordinates", "lat"],
+            required: true,
+            component: Ant.InputNumber,
+          },
+
+          {
+            id: "lng",
+            label: t("management.visits.fields.coordinates.lng"),
+            name: ["coordinates", "lng"],
+            required: true,
+            component: Ant.InputNumber,
+          },
+        ],
+      },
+
+      {
+        id: "locationValidation",
+        label: t("management.visits.fields.locationValidation"),
+        name: ["locationValidation"],
+        component: Ant.InputNumber,
+      },
+
+      {
         id: "doctorId",
         label: t("management.visits.fields.doctor"),
         name: ["doctorId"],
@@ -44,6 +85,21 @@ export class VisitEditForm extends XForm {
           </Ant.Form.Item>
         ),
       },
+
+      {
+        id: "rotationId",
+        label: t("management.visits.fields.rotation"),
+        name: ["rotationId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RotationsCollection}
+              field="dateIntervale"
+              required={false}
+            />
+          </Ant.Form.Item>
+        ),
+      },
     ]);
   }
 
@@ -51,11 +107,22 @@ export class VisitEditForm extends XForm {
     return {
       _id: 1,
       information: 1,
+      information2: 1,
+      coordinates: {
+        lat: 1,
+        lng: 1,
+      },
+      locationValidation: 1,
       doctor: {
         _id: 1,
         fullName: 1,
       },
       doctorId: 1,
+      rotation: {
+        _id: 1,
+        dateIntervale: 1,
+      },
+      rotationId: 1,
     };
   }
 

@@ -1,0 +1,62 @@
+{
+  "en": {
+    "management": {
+      "doctors": {
+        "fields": {
+          "regionId": "regionId",
+          "updatedById": "updatedById",
+          "updatedById_description": "Represents the user's id who has made the latest update on this object",
+          "createdById": "createdById",
+          "createdById_description": "Represents the user's id who has created this object",
+          "address": "Address",
+          "address.wilaya": "Address — Wilaya",
+          "address.daira": "Address — Daira",
+          "address.commune": "Address — Commune",
+          "coordinates": "Coordinates",
+          "coordinates.lat": "Coordinates — Lat",
+          "coordinates.lng": "Coordinates — Lng",
+          "phone": "Phone",
+          "fullName": "Full Name",
+          "updatedAt": "Updated At",
+          "updatedAt_description": "Represents the last time when the object was updated",
+          "createdAt": "Created At",
+          "createdAt_description": "Represents the date when this object was created",
+          "isDeleted": "isDeleted",
+          "isDeleted_description": "This field is used to identify if this object has been soft-deleted",
+          "isEnabled": "Is Enabled",
+          "profile": "Profile",
+          "profile.firstName": "Profile — First Name",
+          "profile.lastName": "Profile — Last Name",
+          "_id": "ID",
+          "createdBy": "Created By",
+          "createdBy_description": "Represents the user who has created this object",
+          "updatedBy": "Updated By",
+          "updatedBy_description": "Represents the user who has made the latest update on this object",
+          "region": "Region"
+        },
+        "menu": {
+          "title": "Doctors"
+        },
+        "list": {
+          "header": "Doctors List",
+          "create_btn": "New Doctor"
+        },
+        "create": {
+          "header": "Create Doctor"
+        },
+        "edit": {
+          "header": "Edit Doctor"
+        },
+        "view": {
+          "header": "View Doctor"
+        },
+        "delete_confirmation": "You have deleted the Doctor",
+        "create_confirmation": "You successfully added a new Doctor",
+        "edit_confirmation": "You successfully edited the Doctor"
+      },
+      "dashboard": {
+        "dashboard":"Dashboard"
+      }
+    }
+  }
+}

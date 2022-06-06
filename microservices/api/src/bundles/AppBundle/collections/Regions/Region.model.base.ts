@@ -29,14 +29,16 @@ export class Region {
   @Is(an.array().of(an.objectId()).required())
   statesListIds: ObjectId[] = [];
 
-  superVisor: User;
+  superVisor?: User;
 
-  @Is(an.objectId().required())
-  superVisorId: ObjectId;
+  @Is(an.objectId().nullable())
+  superVisorId?: ObjectId;
 
   /**
    * @description Represents the last time when the object was updated
    */
   @Is(a.date().required())
   updatedAt: Date;
+
+  usersList: User[] = [];
 }

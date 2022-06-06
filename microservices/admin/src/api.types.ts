@@ -82,6 +82,7 @@ export type ChangePasswordInput = {
 export type Doctor = {
   __typename?: 'Doctor';
   _id?: Maybe<Scalars['ObjectId']>;
+  address?: Maybe<DoctorAddress>;
   coordinates: DoctorCoordinates;
   /** Represents the date when this object was created */
   createdAt: Scalars['Date'];
@@ -93,6 +94,8 @@ export type Doctor = {
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfile;
+  region?: Maybe<Region>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
   /** Represents the user who has made the latest update on this object */
@@ -101,23 +104,37 @@ export type Doctor = {
   updatedById?: Maybe<Scalars['ObjectId']>;
 };
 
+export type DoctorAddress = {
+  __typename?: 'DoctorAddress';
+  wilaya?: Maybe<Scalars['String']>;
+  daira?: Maybe<Scalars['String']>;
+  commune?: Maybe<Scalars['String']>;
+};
+
+export type DoctorAddressInput = {
+  wilaya?: Maybe<Scalars['String']>;
+  daira?: Maybe<Scalars['String']>;
+  commune?: Maybe<Scalars['String']>;
+};
+
 export type DoctorCoordinates = {
   __typename?: 'DoctorCoordinates';
-  lat: Scalars['String'];
-  lng: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
 };
 
 export type DoctorCoordinatesInput = {
-  lat: Scalars['String'];
-  lng: Scalars['String'];
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
 };
 
 export type DoctorInsertInput = {
+  address?: Maybe<DoctorAddressInput>;
   coordinates: DoctorCoordinatesInput;
-  fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   phone: Scalars['String'];
   profile: DoctorProfileInput;
+  regionId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type DoctorProfile = {
@@ -132,11 +149,12 @@ export type DoctorProfileInput = {
 };
 
 export type DoctorUpdateInput = {
+  address?: Maybe<DoctorAddressInput>;
   coordinates?: Maybe<DoctorCoordinatesInput>;
-  fullName?: Maybe<Scalars['String']>;
   isEnabled?: Maybe<Scalars['Boolean']>;
   phone?: Maybe<Scalars['String']>;
   profile?: Maybe<DoctorProfileInput>;
+  regionId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type DocumentUpdateInput = {
@@ -171,6 +189,9 @@ export type Mutation = {
   RegionsInsertOne?: Maybe<Region>;
   RegionsUpdateOne: Region;
   RegionsDeleteOne?: Maybe<Scalars['Boolean']>;
+  RotationsInsertOne?: Maybe<Rotation>;
+  RotationsUpdateOne: Rotation;
+  RotationsDeleteOne?: Maybe<Scalars['Boolean']>;
   StatesInsertOne?: Maybe<State>;
   StatesUpdateOne: State;
   StatesDeleteOne?: Maybe<Scalars['Boolean']>;
@@ -180,7 +201,7 @@ export type Mutation = {
   AppFileUploadToGroup?: Maybe<AppFile>;
   AppFileUpload?: Maybe<AppFile>;
   UsersInsertOne?: Maybe<User>;
-  UserRegistration: Scalars['ObjectId'];
+  UserRegistration?: Maybe<Scalars['ObjectId']>;
   UsersUpdateOne: User;
   UsersDeleteOne?: Maybe<Scalars['Boolean']>;
   VisitsInsertOne?: Maybe<Visit>;
@@ -229,6 +250,22 @@ export type MutationRegionsUpdateOneArgs = {
 
 
 export type MutationRegionsDeleteOneArgs = {
+  _id: Scalars['ObjectId'];
+};
+
+
+export type MutationRotationsInsertOneArgs = {
+  document: RotationInsertInput;
+};
+
+
+export type MutationRotationsUpdateOneArgs = {
+  _id: Scalars['ObjectId'];
+  document: RotationUpdateInput;
+};
+
+
+export type MutationRotationsDeleteOneArgs = {
   _id: Scalars['ObjectId'];
 };
 
@@ -352,6 +389,9 @@ export type Query = {
   RegionsFindOne?: Maybe<Region>;
   RegionsFind: Array<Maybe<Region>>;
   RegionsCount: Scalars['Int'];
+  RotationsFindOne?: Maybe<Rotation>;
+  RotationsFind: Array<Maybe<Rotation>>;
+  RotationsCount: Scalars['Int'];
   StatesFindOne?: Maybe<State>;
   StatesFind: Array<Maybe<State>>;
   StatesCount: Scalars['Int'];
@@ -396,6 +436,21 @@ export type QueryRegionsFindArgs = {
 
 
 export type QueryRegionsCountArgs = {
+  query?: Maybe<QueryInput>;
+};
+
+
+export type QueryRotationsFindOneArgs = {
+  query?: Maybe<QueryInput>;
+};
+
+
+export type QueryRotationsFindArgs = {
+  query?: Maybe<QueryInput>;
+};
+
+
+export type QueryRotationsCountArgs = {
   query?: Maybe<QueryInput>;
 };
 
@@ -485,16 +540,17 @@ export type Region = {
   name: Scalars['String'];
   statesList: Array<Maybe<State>>;
   statesListIds: Array<Maybe<Scalars['ObjectId']>>;
-  superVisor: User;
-  superVisorId: Scalars['ObjectId'];
+  superVisor?: Maybe<User>;
+  superVisorId?: Maybe<Scalars['ObjectId']>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
+  usersList: Array<Maybe<User>>;
 };
 
 export type RegionInsertInput = {
   name: Scalars['String'];
   statesListIds: Array<Maybe<Scalars['ObjectId']>>;
-  superVisorId: Scalars['ObjectId'];
+  superVisorId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type RegionUpdateInput = {
@@ -527,6 +583,55 @@ export type ResetPasswordResponse = {
   token: Scalars['String'];
 };
 
+export type Rotation = {
+  __typename?: 'Rotation';
+  _id?: Maybe<Scalars['ObjectId']>;
+  /** Represents the date when this object was created */
+  createdAt: Scalars['Date'];
+  /** Represents the user who has created this object */
+  createdBy?: Maybe<User>;
+  /** Represents the user's id who has created this object */
+  createdById?: Maybe<Scalars['ObjectId']>;
+  dateIntervale: Scalars['String'];
+  doctorsList: Array<Maybe<Doctor>>;
+  doctorsListIds: Array<Maybe<Scalars['ObjectId']>>;
+  from: Scalars['Date'];
+  isDone: Scalars['Boolean'];
+  to: Scalars['Date'];
+  type: Array<Maybe<RotationType>>;
+  /** Represents the last time when the object was updated */
+  updatedAt: Scalars['Date'];
+  /** Represents the user who has made the latest update on this object */
+  updatedBy?: Maybe<User>;
+  /** Represents the user's id who has made the latest update on this object */
+  updatedById?: Maybe<Scalars['ObjectId']>;
+  user: User;
+  userId: Scalars['ObjectId'];
+};
+
+export type RotationInsertInput = {
+  doctorsListIds: Array<Maybe<Scalars['ObjectId']>>;
+  from: Scalars['Date'];
+  isDone: Scalars['Boolean'];
+  to: Scalars['Date'];
+  type: Array<Maybe<RotationType>>;
+  userId: Scalars['ObjectId'];
+};
+
+export enum RotationType {
+  EACH_DAY = 'EACH_DAY',
+  GLOBAL = 'GLOBAL'
+}
+
+export type RotationUpdateInput = {
+  doctorsListIds?: Maybe<Array<Maybe<Scalars['ObjectId']>>>;
+  from?: Maybe<Scalars['Date']>;
+  isDone?: Maybe<Scalars['Boolean']>;
+  to?: Maybe<Scalars['Date']>;
+  type?: Maybe<Array<Maybe<RotationType>>>;
+  userId?: Maybe<Scalars['ObjectId']>;
+};
+
 export type State = {
   __typename?: 'State';
   _id?: Maybe<Scalars['ObjectId']>;
@@ -547,6 +652,8 @@ export type Subscription = {
   DoctorsSubscriptionCount?: Maybe<SubscriptionCountEvent>;
   RegionsSubscription?: Maybe<SubscriptionEvent>;
   RegionsSubscriptionCount?: Maybe<SubscriptionCountEvent>;
+  RotationsSubscription?: Maybe<SubscriptionEvent>;
+  RotationsSubscriptionCount?: Maybe<SubscriptionCountEvent>;
   StatesSubscription?: Maybe<SubscriptionEvent>;
   StatesSubscriptionCount?: Maybe<SubscriptionCountEvent>;
   UsersSubscription?: Maybe<SubscriptionEvent>;
@@ -572,6 +679,16 @@ export type SubscriptionRegionsSubscriptionArgs = {
 
 
 export type SubscriptionRegionsSubscriptionCountArgs = {
+  filters?: Maybe<Scalars['EJSON']>;
+};
+
+
+export type SubscriptionRotationsSubscriptionArgs = {
+  body?: Maybe<Scalars['EJSON']>;
+};
+
+
+export type SubscriptionRotationsSubscriptionCountArgs = {
   filters?: Maybe<Scalars['EJSON']>;
 };
 
@@ -637,6 +754,8 @@ export type User = {
   fullName: Scalars['String'];
   isEnabled: Scalars['Boolean'];
   profile: UserProfile;
+  region?: Maybe<Region>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles: Array<Maybe<UserRole>>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
@@ -649,6 +768,7 @@ export type User = {
 export type UserInsertInput = {
   isEnabled: Scalars['Boolean'];
   profile: UserProfileInput;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles: Array<Maybe<UserRole>>;
 };
 
@@ -668,6 +788,7 @@ export type UserRegistrationInput = {
   password: Scalars['String'];
   profile: UserProfileInput;
   roles: Array<Maybe<UserRole>>;
+  regionId?: Maybe<Scalars['ObjectId']>;
 };
 
 export enum UserRole {
@@ -679,6 +800,7 @@ export enum UserRole {
 export type UserUpdateInput = {
   isEnabled?: Maybe<Scalars['Boolean']>;
   profile?: Maybe<UserProfileInput>;
+  regionId?: Maybe<Scalars['ObjectId']>;
   roles?: Maybe<Array<Maybe<UserRole>>>;
 };
 
@@ -695,21 +817,53 @@ export type VerifyEmailResponse = {
 export type Visit = {
   __typename?: 'Visit';
   _id?: Maybe<Scalars['ObjectId']>;
+  coordinates: VisitCoordinates;
   /** Represents the date when this object was created */
   createdAt: Scalars['Date'];
+  /** Represents the user who has created this object */
+  createdBy?: Maybe<User>;
+  /** Represents the user's id who has created this object */
+  createdById?: Maybe<Scalars['ObjectId']>;
   doctor: Doctor;
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
+  information2: Scalars['String'];
+  locationValidation?: Maybe<Scalars['Float']>;
+  rotation?: Maybe<Rotation>;
+  rotationId?: Maybe<Scalars['ObjectId']>;
   /** Represents the last time when the object was updated */
   updatedAt: Scalars['Date'];
+  /** Represents the user who has made the latest update on this object */
+  updatedBy?: Maybe<User>;
+  /** Represents the user's id who has made the latest update on this object */
+  updatedById?: Maybe<Scalars['ObjectId']>;
+};
+
+export type VisitCoordinates = {
+  __typename?: 'VisitCoordinates';
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
+};
+
+export type VisitCoordinatesInput = {
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
 };
 
 export type VisitInsertInput = {
+  coordinates: VisitCoordinatesInput;
   doctorId: Scalars['ObjectId'];
   information: Scalars['String'];
+  information2: Scalars['String'];
+  locationValidation?: Maybe<Scalars['Float']>;
+  rotationId?: Maybe<Scalars['ObjectId']>;
 };
 
 export type VisitUpdateInput = {
+  coordinates?: Maybe<VisitCoordinatesInput>;
   doctorId?: Maybe<Scalars['ObjectId']>;
   information?: Maybe<Scalars['String']>;
+  information2?: Maybe<Scalars['String']>;
+  locationValidation?: Maybe<Scalars['Float']>;
+  rotationId?: Maybe<Scalars['ObjectId']>;
 };

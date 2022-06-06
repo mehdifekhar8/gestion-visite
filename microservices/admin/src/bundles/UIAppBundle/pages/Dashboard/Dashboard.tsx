@@ -1,4 +1,4 @@
-import { Collection, useUIComponents, use } from "@bluelibs/x-ui";
+import { Collection, useUIComponents, use, useTranslate } from "@bluelibs/x-ui";
 import { useEffect, useState } from "react";
 import { Card, PageHeader, Row, Col } from "antd";
 import { Constructor } from "@bluelibs/core";
@@ -6,6 +6,7 @@ import { Collections } from "@bundles/UIAppBundle";
 
 export function Dashboard() {
   const UIComponents = useUIComponents();
+  const t = useTranslate();
 
   const cards = Object.values(Collections)
     .filter((v) => Boolean(v))

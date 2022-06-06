@@ -9,6 +9,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -20,6 +21,48 @@ export class DoctorList extends XList<Doctor> {
 
     this.add([
       {
+        id: "address.wilaya",
+        title: t("management.doctors.fields.address.wilaya"),
+        key: "management.doctors.fields.address.wilaya",
+        dataIndex: ["address", "wilaya"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.daira",
+        title: t("management.doctors.fields.address.daira"),
+        key: "management.doctors.fields.address.daira",
+        dataIndex: ["address", "daira"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.commune",
+        title: t("management.doctors.fields.address.commune"),
+        key: "management.doctors.fields.address.commune",
+        dataIndex: ["address", "commune"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "coordinates.lat",
         title: t("management.doctors.fields.coordinates.lat"),
         key: "management.doctors.fields.coordinates.lat",
@@ -27,7 +70,7 @@ export class DoctorList extends XList<Doctor> {
         sorter: true,
         render: (value, model) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -41,7 +84,7 @@ export class DoctorList extends XList<Doctor> {
         sorter: true,
         render: (value, model) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -189,6 +232,28 @@ export class DoctorList extends XList<Doctor> {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "region",
+        title: t("management.doctors.fields.region"),
+        key: "management.doctors.fields.region",
+        dataIndex: ["region"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.REGIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "name",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
@@ -196,12 +261,18 @@ export class DoctorList extends XList<Doctor> {
     return {
       createdBy: "createdBy.fullName",
       updatedBy: "updatedBy.fullName",
+      region: "region.name",
     };
   }
 
   static getRequestBody(): QueryBodyType<Doctor> {
     return {
       _id: 1,
+      address: {
+        wilaya: 1,
+        daira: 1,
+        commune: 1,
+      },
       coordinates: {
         lat: 1,
         lng: 1,
@@ -225,6 +296,11 @@ export class DoctorList extends XList<Doctor> {
         fullName: 1,
       },
       updatedById: 1,
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 }

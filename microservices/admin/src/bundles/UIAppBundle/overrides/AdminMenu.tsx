@@ -9,13 +9,15 @@ import {
   XRouter,
 } from "@bluelibs/x-ui";
 import { IMenuItemConfig, MenuService } from "@bluelibs/x-ui-admin";
-
+import useWindowDimensions from "../components/ViewPort/ViewPort";
 
 const AntdSubMenu = AntdMenu.SubMenu;
 
 type Translator = (key: string) => string;
 
-export  function AdminMenu() {
+export function AdminMenu() {
+  const { height, width } = useWindowDimensions();
+
   const menuService = use(MenuService);
   const guardian = useGuardian();
   const router = useRouter();
@@ -29,12 +31,11 @@ export  function AdminMenu() {
   // We filter on each render for now because it should be super fast.
   // Otherwise we would need to do it in each MenuItem which can be cumbersome.
   const items = menuService.items.filter((item) => {
-    console.log(item.roles)
     if (item.roles) {
       return guardian.hasRole(item.roles);
     }
 
-    return true;
+    return true; 
   });
 
   // Detect which paths are active based on their logic
@@ -43,13 +44,15 @@ export  function AdminMenu() {
 
   return (
     <AntdMenu
-      mode="inline"
+      theme={"dark"}
+      mode={width > 900  ? "inline" :"horizontal"}
+     // style={{ height: "100%" }}
       defaultOpenKeys={selectedOrOpenKeys}
       defaultSelectedKeys={selectedOrOpenKeys}
+      inlineCollapsed={width > 900  ? true : false}
     >
       {/* Make sure that subitems are right under Menu or it will fail */}
       {items.map((item) => {
-        
         return renderItem(item, router, t);
       })}
     </AntdMenu>
@@ -105,13 +108,14 @@ function ItemRender(props: ItemRenderProps) {
   const { item, t } = props;
 
   if (typeof item.label === "string") {
-    return <span>{t(item.label)}</span>;
+    return <span>{ item.label =="Dashboard"  ? item.label: t(item.label)}</span>;
+    //you have removed translation for dashboard
   }
 
   return React.createElement(item.label);
 }
 
-function getSelectedKeys(items: IMenuItemConfig[], pathname: string) {
+export function getSelectedKeys(items: IMenuItemConfig[], pathname: string) {
   const selectedKeys = [];
 
   items.forEach((item) => {

@@ -6,7 +6,11 @@ import { Routes } from "@bundles/UIAppBundle";
 import { Service } from "@bluelibs/core";
 import { IComponents, XRouter, use, QueryBodyType } from "@bluelibs/x-ui";
 import * as Ant from "antd";
-import { User, UsersCollection } from "@bundles/UIAppBundle/collections";
+import {
+  User,
+  UsersCollection,
+  RegionsCollection,
+} from "@bundles/UIAppBundle/collections";
 
 @Service({ transient: true })
 export class UserList extends XList<User> {
@@ -181,6 +185,28 @@ export class UserList extends XList<User> {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "region",
+        title: t("management.users.fields.region"),
+        key: "management.users.fields.region",
+        dataIndex: ["region"],
+        sorter: true,
+        render: (value, model) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.REGIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "name",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
@@ -188,6 +214,7 @@ export class UserList extends XList<User> {
     return {
       createdBy: "createdBy.fullName",
       updatedBy: "updatedBy.fullName",
+      region: "region.name",
     };
   }
 
@@ -214,6 +241,11 @@ export class UserList extends XList<User> {
         fullName: 1,
       },
       updatedById: 1,
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 }

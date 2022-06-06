@@ -6,7 +6,11 @@ import { XFormElementType, XForm } from "@bluelibs/x-ui-admin";
 import { Routes } from "@bundles/UIAppBundle";
 import { Service, Inject } from "@bluelibs/core";
 import { features } from "./features";
-import { User, UsersCollection } from "@bundles/UIAppBundle/collections";
+import {
+  User,
+  UsersCollection,
+  RegionsCollection,
+} from "@bundles/UIAppBundle/collections";
 
 @Service({ transient: true })
 export class UserCreateForm extends XForm {
@@ -88,6 +92,21 @@ export class UserCreateForm extends XForm {
             component: Ant.Input,
           },
         ],
+      },
+
+      {
+        id: "regionId",
+        label: t("management.users.fields.region"),
+        name: ["regionId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
+              required={false}
+            />
+          </Ant.Form.Item>
+        ),
       },
     ]);
   }

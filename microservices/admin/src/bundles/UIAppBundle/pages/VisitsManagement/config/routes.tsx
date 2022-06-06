@@ -32,3 +32,8 @@ export const VISITS_VIEW: IRoute<{ id: string }> = {
   path: "/admin/visits/:id/view",
   component: VisitsView,
 };
+
+export const VISITS_DOCTOR: IRoute<{ id: string; rotationId: string }> = {
+  path: "/admin/visits/create/:id/:rotationId",
+  component: VisitsCreate,
+};

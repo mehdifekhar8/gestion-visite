@@ -7,6 +7,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -18,6 +19,35 @@ export class DoctorListFiltersForm extends XForm {
 
     this.add([
       {
+        id: "address",
+        label: t("management.doctors.fields.address"),
+        name: ["address"],
+        columns: true,
+        nest: [
+          {
+            id: "wilaya",
+            label: t("management.doctors.fields.address.wilaya"),
+            name: ["address", "wilaya"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "daira",
+            label: t("management.doctors.fields.address.daira"),
+            name: ["address", "daira"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "commune",
+            label: t("management.doctors.fields.address.commune"),
+            name: ["address", "commune"],
+            component: Ant.Input,
+          },
+        ],
+      },
+
+      {
         id: "coordinates",
         label: t("management.doctors.fields.coordinates"),
         name: ["coordinates"],
@@ -28,7 +58,7 @@ export class DoctorListFiltersForm extends XForm {
             label: t("management.doctors.fields.coordinates.lat"),
             name: ["coordinates", "lat"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
 
           {
@@ -36,7 +66,7 @@ export class DoctorListFiltersForm extends XForm {
             label: t("management.doctors.fields.coordinates.lng"),
             name: ["coordinates", "lng"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
         ],
       },
@@ -45,17 +75,6 @@ export class DoctorListFiltersForm extends XForm {
         id: "phone",
         label: t("management.doctors.fields.phone"),
         name: ["phone"],
-        render: (props) => (
-          <Ant.Form.Item {...props}>
-            <Ant.Input />
-          </Ant.Form.Item>
-        ),
-      },
-
-      {
-        id: "fullName",
-        label: t("management.doctors.fields.fullName"),
-        name: ["fullName"],
         render: (props) => (
           <Ant.Form.Item {...props}>
             <Ant.Input />
@@ -156,6 +175,22 @@ export class DoctorListFiltersForm extends XForm {
             <UIComponents.RemoteSelect
               collectionClass={UsersCollection}
               field="fullName"
+              placeholder="Please select an option"
+              mode="multiple"
+            />
+          </Ant.Form.Item>
+        ),
+      },
+
+      {
+        id: "regionId",
+        label: t("management.doctors.fields.region"),
+        name: ["regionId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
               placeholder="Please select an option"
               mode="multiple"
             />

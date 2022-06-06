@@ -8,6 +8,7 @@ import * as Ant from "antd";
 import {
   Doctor,
   UsersCollection,
+  RegionsCollection,
   DoctorsCollection,
 } from "@bundles/UIAppBundle/collections";
 
@@ -22,6 +23,34 @@ export class DoctorEditForm extends XForm {
 
     this.add([
       {
+        id: "address",
+        label: t("management.doctors.fields.address"),
+        name: ["address"],
+        nest: [
+          {
+            id: "wilaya",
+            label: t("management.doctors.fields.address.wilaya"),
+            name: ["address", "wilaya"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "daira",
+            label: t("management.doctors.fields.address.daira"),
+            name: ["address", "daira"],
+            component: Ant.Input,
+          },
+
+          {
+            id: "commune",
+            label: t("management.doctors.fields.address.commune"),
+            name: ["address", "commune"],
+            component: Ant.Input,
+          },
+        ],
+      },
+
+      {
         id: "coordinates",
         label: t("management.doctors.fields.coordinates"),
         name: ["coordinates"],
@@ -32,7 +61,7 @@ export class DoctorEditForm extends XForm {
             label: t("management.doctors.fields.coordinates.lat"),
             name: ["coordinates", "lat"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
 
           {
@@ -40,7 +69,7 @@ export class DoctorEditForm extends XForm {
             label: t("management.doctors.fields.coordinates.lng"),
             name: ["coordinates", "lng"],
             required: true,
-            component: Ant.Input,
+            component: Ant.InputNumber,
           },
         ],
       },
@@ -49,14 +78,6 @@ export class DoctorEditForm extends XForm {
         id: "phone",
         label: t("management.doctors.fields.phone"),
         name: ["phone"],
-        required: true,
-        component: Ant.Input,
-      },
-
-      {
-        id: "fullName",
-        label: t("management.doctors.fields.fullName"),
-        name: ["fullName"],
         required: true,
         component: Ant.Input,
       },
@@ -103,23 +124,47 @@ export class DoctorEditForm extends XForm {
           },
         ],
       },
+
+      {
+        id: "regionId",
+        label: t("management.doctors.fields.region"),
+        name: ["regionId"],
+        render: (props) => (
+          <Ant.Form.Item {...props}>
+            <UIComponents.RemoteSelect
+              collectionClass={RegionsCollection}
+              field="name"
+              required={false}
+            />
+          </Ant.Form.Item>
+        ),
+      },
     ]);
   }
 
   static getRequestBody(): QueryBodyType<Doctor> {
     return {
       _id: 1,
+      address: {
+        wilaya: 1,
+        daira: 1,
+        commune: 1,
+      },
       coordinates: {
         lat: 1,
         lng: 1,
       },
       phone: 1,
-      fullName: 1,
       isEnabled: 1,
       profile: {
         firstName: 1,
         lastName: 1,
       },
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 

@@ -62,6 +62,94 @@ export class VisitViewer extends XViewer {
         },
       },
       {
+        id: "information2",
+        label: t("management.visits.fields.information2"),
+        dataIndex: ["information2"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "coordinates.lat",
+        label: t("management.visits.fields.coordinates.lat"),
+        dataIndex: ["coordinates", "lat"],
+        render: (value) => {
+          const props = {
+            type: "number",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "coordinates.lng",
+        label: t("management.visits.fields.coordinates.lng"),
+        dataIndex: ["coordinates", "lng"],
+        render: (value) => {
+          const props = {
+            type: "number",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "locationValidation",
+        label: t("management.visits.fields.locationValidation"),
+        dataIndex: ["locationValidation"],
+        render: (value) => {
+          const props = {
+            type: "number",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "createdBy",
+        label: t("management.visits.fields.createdBy"),
+        dataIndex: ["createdBy"],
+        render: (value) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.USERS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "fullName",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "updatedBy",
+        label: t("management.visits.fields.updatedBy"),
+        dataIndex: ["updatedBy"],
+        render: (value) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.USERS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "fullName",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "doctor",
         label: t("management.visits.fields.doctor"),
         dataIndex: ["doctor"],
@@ -81,6 +169,26 @@ export class VisitViewer extends XViewer {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "rotation",
+        label: t("management.visits.fields.rotation"),
+        dataIndex: ["rotation"],
+        render: (value) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.ROTATIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "dateIntervale",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
@@ -90,11 +198,32 @@ export class VisitViewer extends XViewer {
       createdAt: 1,
       updatedAt: 1,
       information: 1,
+      information2: 1,
+      coordinates: {
+        lat: 1,
+        lng: 1,
+      },
+      locationValidation: 1,
+      createdBy: {
+        _id: 1,
+        fullName: 1,
+      },
+      createdById: 1,
+      updatedBy: {
+        _id: 1,
+        fullName: 1,
+      },
+      updatedById: 1,
       doctor: {
         _id: 1,
         fullName: 1,
       },
       doctorId: 1,
+      rotation: {
+        _id: 1,
+        dateIntervale: 1,
+      },
+      rotationId: 1,
     };
   }
 }

@@ -14,7 +14,8 @@
           "superVisorId": "superVisorId",
           "statesListIds": "statesListIds",
           "superVisor": "Super Visor",
-          "statesList": "States List"
+          "statesList": "States List",
+          "usersList": "Users List"
         },
         "menu": {
           "title": "Regions"

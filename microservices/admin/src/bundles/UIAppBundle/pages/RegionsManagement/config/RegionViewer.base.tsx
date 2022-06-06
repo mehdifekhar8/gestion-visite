@@ -110,6 +110,35 @@ export class RegionViewer extends XViewer {
           );
         },
       },
+      {
+        id: "usersList",
+        label: t("management.regions.fields.usersList"),
+        dataIndex: ["usersList"],
+        render: (value) => {
+          return (
+            <>
+              {value &&
+                value.map((value: any, idx: number) => {
+                  const props = {
+                    type: "relation",
+                    value,
+                    relation: {
+                      path: router.path(Routes.USERS_VIEW, {
+                        params: {
+                          id: value?._id,
+                        },
+                      }),
+                      dataIndex: "fullName",
+                    },
+                  };
+                  return (
+                    <UIComponents.AdminListItemRenderer {...props} key={idx} />
+                  );
+                })}
+            </>
+          );
+        },
+      },
     ]);
   }
 
@@ -129,6 +158,10 @@ export class RegionViewer extends XViewer {
         state: 1,
       },
       statesListIds: 1,
+      usersList: {
+        _id: 1,
+        fullName: 1,
+      },
     };
   }
 }

@@ -17,6 +17,7 @@ export function DoctorsListFiltersBase(props: DoctorsListFiltersProps) {
 
   const debouncedFilterUpdates = React.useMemo(() => {
     const setFilters = (_, filters) => {
+      console.log(filters)
       props.onUpdate(filters);
     };
     return debounce(setFilters, 500);
@@ -34,7 +35,7 @@ export function DoctorsListFiltersBase(props: DoctorsListFiltersProps) {
       <Ant.Row gutter={[16, 8]}>
         {filterForm.rest().map((item) => {
           return (
-            <Ant.Col span={8} key={item.id}>
+            <Ant.Col span={12} key={item.id}>
               {filterForm.render(item)}
             </Ant.Col>
           );

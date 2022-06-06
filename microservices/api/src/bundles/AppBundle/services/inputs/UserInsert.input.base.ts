@@ -20,6 +20,9 @@ export class UserInsertInput {
   @Is(() => Schema.from(UserProfileInput))
   profile: UserProfileInput;
 
+  @Is(an.objectId().nullable())
+  regionId?: ObjectId;
+
   @Is(
     an
       .array()

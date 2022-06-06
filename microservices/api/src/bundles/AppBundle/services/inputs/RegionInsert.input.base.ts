@@ -10,6 +10,6 @@ export class RegionInsertInput {
   @Is(an.array().of(an.objectId()).required())
   statesListIds: ObjectId[] = [];
 
-  @Is(an.objectId().required())
-  superVisorId: ObjectId;
+  @Is(an.objectId().nullable())
+  superVisorId?: ObjectId;
 }

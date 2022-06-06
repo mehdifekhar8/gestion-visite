@@ -20,6 +20,8 @@ export default /* GraphQL */ `
     fullName: String!
     isEnabled: Boolean!
     profile: UserProfile!
+    region: Region
+    regionId: ObjectId
     roles: [UserRole]!
 
     """

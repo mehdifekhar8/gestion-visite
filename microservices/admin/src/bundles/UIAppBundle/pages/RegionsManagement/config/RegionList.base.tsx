@@ -115,6 +115,37 @@ export class RegionList extends XList<Region> {
           );
         },
       },
+      {
+        id: "usersList",
+        title: t("management.regions.fields.usersList"),
+        key: "management.regions.fields.usersList",
+        dataIndex: ["usersList"],
+        sorter: true,
+        render: (value, model) => {
+          return (
+            <>
+              {value &&
+                value.map((value: any, idx: number) => {
+                  const props = {
+                    type: "relation",
+                    value,
+                    relation: {
+                      path: router.path(Routes.USERS_VIEW, {
+                        params: {
+                          id: value?._id,
+                        },
+                      }),
+                      dataIndex: "fullName",
+                    },
+                  };
+                  return (
+                    <UIComponents.AdminListItemRenderer {...props} key={idx} />
+                  );
+                })}
+            </>
+          );
+        },
+      },
     ]);
   }
 
@@ -122,6 +153,7 @@ export class RegionList extends XList<Region> {
     return {
       superVisor: "superVisor.fullName",
       statesList: "statesList.state",
+      usersList: "usersList.fullName",
     };
   }
 
@@ -141,6 +173,10 @@ export class RegionList extends XList<Region> {
         state: 1,
       },
       statesListIds: 1,
+      usersList: {
+        _id: 1,
+        fullName: 1,
+      },
     };
   }
 }

@@ -7,6 +7,9 @@ import { VisitList as BaseVisitList } from "./VisitList.base";
 export class VisitList extends BaseVisitList {
   build() {
     super.build();
+    if(process.env.MODE!="advanced") {
+      this.remove("rotation")
+    }
     // Perform additional modifications such as updating how a list item renders or add additional ones
   }
 

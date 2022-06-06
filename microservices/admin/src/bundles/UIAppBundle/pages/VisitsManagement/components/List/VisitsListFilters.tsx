@@ -37,7 +37,7 @@ export function VisitsListFiltersBase(props: VisitsListFiltersProps) {
       <Ant.Row gutter={[16, 8]}>
         {filterForm.rest().map((item) => {
           return (
-            <Ant.Col span={8} key={item.id}>
+            <Ant.Col span={12} key={item.id}>
               {filterForm.render(item)}
             </Ant.Col>
           );

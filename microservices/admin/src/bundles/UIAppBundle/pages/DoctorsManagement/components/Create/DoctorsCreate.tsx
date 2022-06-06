@@ -5,8 +5,8 @@ import { DoctorCreateForm } from "../../config/DoctorCreateForm";
 import { Doctor, DoctorsCollection } from "@bundles/UIAppBundle/collections";
 
 const formLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  labelCol: { xs: { span: 24 }, sm: { span: 8 }, md: { span: 8 }, lg: { span: 6 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 24 }, md: { span: 14 }, lg: { span: 16 } }
 };
 
 const formTailLayout = {
@@ -18,7 +18,7 @@ export function DoctorsCreate() {
   const t = useTranslate();
   const form = use(DoctorCreateForm, { transient: true });
   form.build();
-
+ 
   return (
     <UIComponents.AdminLayout>
       <Ant.PageHeader
@@ -29,7 +29,7 @@ export function DoctorsCreate() {
         <Ant.Form
           {...formLayout}
           requiredMark="optional"
-          onFinish={(document) => form.onSubmit(document)}
+          onFinish={(document) => form.onSubmitCustom(document)}
         >
           {form.render()}
           <Ant.Form.Item {...formTailLayout}>

@@ -1,6 +1,7 @@
 export default /* GraphQL */ `
   type Doctor {
     _id: ObjectId
+    address: DoctorAddress
     coordinates: DoctorCoordinates!
 
     """
@@ -21,6 +22,8 @@ export default /* GraphQL */ `
     isEnabled: Boolean!
     phone: String!
     profile: DoctorProfile!
+    region: Region
+    regionId: ObjectId
 
     """
     Represents the last time when the object was updated
@@ -38,9 +41,14 @@ export default /* GraphQL */ `
     updatedById: ObjectId
   }
 
+  type DoctorAddress {
+    wilaya: String
+    daira: String
+    commune: String
+  }
   type DoctorCoordinates {
-    lat: String!
-    lng: String!
+    lat: Float!
+    lng: Float!
   }
   type DoctorProfile {
     firstName: String!

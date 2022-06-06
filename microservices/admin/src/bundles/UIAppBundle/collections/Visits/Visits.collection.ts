@@ -4,7 +4,11 @@ import {
   CollectionTransformMap,
 } from "@bluelibs/x-ui";
 import { Visit } from "@root/api.types";
-import { DoctorsCollection } from "@bundles/UIAppBundle/collections";
+import {
+  UsersCollection,
+  DoctorsCollection,
+  RotationsCollection,
+} from "@bundles/UIAppBundle/collections";
 import { ObjectId } from "@bluelibs/ejson";
 
 export type { Visit };
@@ -25,9 +29,24 @@ export class VisitsCollection extends Collection<Visit> {
   getLinks(): CollectionLinkConfig<Visit>[] {
     return [
       {
+        collection: () => UsersCollection,
+        name: "createdBy",
+        field: "createdById",
+      },
+      {
+        collection: () => UsersCollection,
+        name: "updatedBy",
+        field: "updatedById",
+      },
+      {
         collection: () => DoctorsCollection,
         name: "doctor",
         field: "doctorId",
+      },
+      {
+        collection: () => RotationsCollection,
+        name: "rotation",
+        field: "rotationId",
       },
     ];
   }

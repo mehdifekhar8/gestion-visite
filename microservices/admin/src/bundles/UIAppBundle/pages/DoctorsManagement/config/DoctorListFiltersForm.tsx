@@ -5,7 +5,10 @@ import { DoctorListFiltersForm as BaseDoctorListFiltersForm } from "./DoctorList
 export class DoctorListFiltersForm extends BaseDoctorListFiltersForm {
   build() {
     super.build();
-
+   this.remove("coordinates")
+   this.remove("isEnabled")
+   this.remove("createdAt")
+   this.remove("updatedAt")
     // Perform additional modifications such as updating rendering functions, labels, description
   }
 }

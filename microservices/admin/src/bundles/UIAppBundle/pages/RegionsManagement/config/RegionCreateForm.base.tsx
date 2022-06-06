@@ -35,13 +35,12 @@ export class RegionCreateForm extends XForm {
         id: "superVisorId",
         label: t("management.regions.fields.superVisor"),
         name: ["superVisorId"],
-        required: true,
         render: (props) => (
           <Ant.Form.Item {...props}>
             <UIComponents.RemoteSelect
               collectionClass={UsersCollection}
               field="fullName"
-              required={true}
+              required={false}
             />
           </Ant.Form.Item>
         ),

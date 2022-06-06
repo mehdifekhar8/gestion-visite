@@ -12,7 +12,11 @@
     background: #fff;
     padding: 0;
     text-align: right;
-    padding-right: 16px;
+   padding-right: 16px;
+   @media only screen and (max-width: 600px) {
+    padding-right: 0;
+
+  }
   }
 
   .x-ui-admin-footer {
@@ -24,4 +28,11 @@
 
 .ant-descriptions-item-label {
   font-weight: 500;
+}
+
+.ant-layout-content {
+
+  @media only screen and (max-width: 600px) {
+    margin: 0 !important;
+  }
 }

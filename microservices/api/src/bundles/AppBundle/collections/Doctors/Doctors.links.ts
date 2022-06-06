@@ -1,3 +1,4 @@
+import { RegionsCollection } from "../Regions/Regions.collection";
 import { UsersCollection } from "../Users/Users.collection";
 import { IBundleLinkCollectionOption } from "@bluelibs/mongo-bundle";
 
@@ -12,4 +13,9 @@ export const createdBy: IBundleLinkCollectionOption = {
 export const updatedBy: IBundleLinkCollectionOption = {
   collection: () => UsersCollection,
   field: "updatedById",
+};
+
+export const region: IBundleLinkCollectionOption = {
+  collection: () => RegionsCollection,
+  field: "regionId",
 };

@@ -14,12 +14,48 @@ export class DoctorViewer extends XViewer {
 
     this.add([
       {
+        id: "address.wilaya",
+        label: t("management.doctors.fields.address.wilaya"),
+        dataIndex: ["address", "wilaya"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.daira",
+        label: t("management.doctors.fields.address.daira"),
+        dataIndex: ["address", "daira"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
+        id: "address.commune",
+        label: t("management.doctors.fields.address.commune"),
+        dataIndex: ["address", "commune"],
+        render: (value) => {
+          const props = {
+            type: "string",
+            value,
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
+      {
         id: "coordinates.lat",
         label: t("management.doctors.fields.coordinates.lat"),
         dataIndex: ["coordinates", "lat"],
         render: (value) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -31,7 +67,7 @@ export class DoctorViewer extends XViewer {
         dataIndex: ["coordinates", "lng"],
         render: (value) => {
           const props = {
-            type: "string",
+            type: "number",
             value,
           };
           return <UIComponents.AdminListItemRenderer {...props} />;
@@ -173,12 +209,37 @@ export class DoctorViewer extends XViewer {
           return <UIComponents.AdminListItemRenderer {...props} />;
         },
       },
+      {
+        id: "region",
+        label: t("management.doctors.fields.region"),
+        dataIndex: ["region"],
+        render: (value) => {
+          const props = {
+            type: "relation",
+            value,
+            relation: {
+              path: router.path(Routes.REGIONS_VIEW, {
+                params: {
+                  id: value?._id,
+                },
+              }),
+              dataIndex: "name",
+            },
+          };
+          return <UIComponents.AdminListItemRenderer {...props} />;
+        },
+      },
     ]);
   }
 
   static getRequestBody(): QueryBodyType<Doctor> {
     return {
       _id: 1,
+      address: {
+        wilaya: 1,
+        daira: 1,
+        commune: 1,
+      },
       coordinates: {
         lat: 1,
         lng: 1,
@@ -202,6 +263,11 @@ export class DoctorViewer extends XViewer {
         fullName: 1,
       },
       updatedById: 1,
+      region: {
+        _id: 1,
+        name: 1,
+      },
+      regionId: 1,
     };
   }
 }

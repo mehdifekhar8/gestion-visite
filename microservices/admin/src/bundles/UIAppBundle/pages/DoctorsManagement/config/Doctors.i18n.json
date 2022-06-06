@@ -3,10 +3,15 @@
     "management": {
       "doctors": {
         "fields": {
+          "regionId": "regionId",
           "updatedById": "updatedById",
           "updatedById_description": "Represents the user's id who has made the latest update on this object",
           "createdById": "createdById",
           "createdById_description": "Represents the user's id who has created this object",
+          "address": "Address",
+          "address.wilaya": "Address — Wilaya",
+          "address.daira": "Address — Daira",
+          "address.commune": "Address — Commune",
           "coordinates": "Coordinates",
           "coordinates.lat": "Coordinates — Lat",
           "coordinates.lng": "Coordinates — Lng",
@@ -26,7 +31,8 @@
           "createdBy": "Created By",
           "createdBy_description": "Represents the user who has created this object",
           "updatedBy": "Updated By",
-          "updatedBy_description": "Represents the user who has made the latest update on this object"
+          "updatedBy_description": "Represents the user who has made the latest update on this object",
+          "region": "Region"
         },
         "menu": {
           "title": "Doctors"

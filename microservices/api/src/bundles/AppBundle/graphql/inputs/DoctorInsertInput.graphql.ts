@@ -1,15 +1,21 @@
 export default /* GraphQL */ `
   input DoctorInsertInput {
+    address: DoctorAddressInput
     coordinates: DoctorCoordinatesInput!
-    fullName: String!
     isEnabled: Boolean!
     phone: String!
     profile: DoctorProfileInput!
+    regionId: ObjectId
   }
 
+  input DoctorAddressInput {
+    wilaya: String
+    daira: String
+    commune: String
+  }
   input DoctorCoordinatesInput {
-    lat: String!
-    lng: String!
+    lat: Float!
+    lng: Float!
   }
   input DoctorProfileInput {
     firstName: String!
