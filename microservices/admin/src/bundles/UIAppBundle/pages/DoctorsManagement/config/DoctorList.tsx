@@ -23,7 +23,6 @@ export class DoctorList extends BaseDoctorList {
     this.update("fullName", {
       order: 0,
     });
-   
 
     let order = reorder(this.elements, 1, 0);
     this.elements = order;
@@ -35,9 +34,24 @@ export class DoctorList extends BaseDoctorList {
       arr[b] = order;
       return arr;
     }
+    this.update("fullName", {
+      responsive: ["sm"],
+    });
+    this.update("region", {
+      responsive: ["sm"],
+    });
+    this.update("phone", {
+      responsive: ["sm"],
+    });
+    this.update("createdBy", {
+      responsive: ["sm"],
+    });
+    this.update("createdAt", {
+      responsive: ["sm"],
+    });
     this.add({
       id: "fullNameOne",
-      title: t("management.doctors.fields.fullName"),
+      title: "Information's",
       key: "management.doctors.fields.fullName",
       dataIndex: ["fullName"],
       sorter: true,
@@ -45,10 +59,9 @@ export class DoctorList extends BaseDoctorList {
         console.log(modal);
         return (
           <Fragment>
-            {modal.fullName}aaa
-            <br />
-            {modal.phone}
-            <br />
+            <h4>FullName:{modal.fullName} </h4>
+            <h4>Phone: {modal.phone}</h4>
+            <h4>Create At: {new Date(modal.createdAt).toLocaleDateString()}</h4>
           </Fragment>
         );
       },
