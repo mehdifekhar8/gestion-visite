@@ -23,12 +23,12 @@ export class DoctorList extends BaseDoctorList {
     this.update("fullName", {
       order: 0,
     });
+   
 
     let order = reorder(this.elements, 1, 0);
     this.elements = order;
     order = reorder(this.elements, 2, 4);
     this.elements = order;
-   console.log(this)
     function reorder(arr, a, b) {
       const order = arr[a];
       arr[a] = arr[b];

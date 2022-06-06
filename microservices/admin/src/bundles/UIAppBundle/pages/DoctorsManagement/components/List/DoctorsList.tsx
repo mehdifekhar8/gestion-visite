@@ -31,8 +31,7 @@ export function DoctorsList() {
   const doctorsCollection = use(DoctorsCollection);
   const { TabPane } = Ant.Tabs;
   const [doctors, setDoctors] = useState([]);
-
-
+  
   useEffect(() => {
     doctorsCollection
       .find(
@@ -91,9 +90,7 @@ export function DoctorsList() {
               onKeyUp={(e) => {
                 const value = (e.target as HTMLInputElement).value;
 
-                console.log(api.getBody());
                 const keys = Object.keys(api.getBody());
-                console.log(keys);
                 value
                   ? api.setFilters({
                       $text: { $search: value },
