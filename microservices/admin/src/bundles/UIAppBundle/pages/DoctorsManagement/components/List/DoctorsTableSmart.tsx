@@ -33,7 +33,7 @@ export class DoctorsAntTableSmart extends AntTableSmart<Doctor> {
     return {
       title: this.i18n.t("generics.list_actions"),
       key: "actions",
-      width: 180,
+      width: 50,
       render: (_, model) => {
         return this.generateActions(model, {
           label: this.i18n.t("generics.list_actions"),

@@ -104,7 +104,7 @@ export function DoctorsList() {
                   expandable={{
                     expandedRowRender: (record) => OtherInformationCard(record),
                   }}
-                  scroll={{ x: 960 }}
+                  scroll={{ x: 300 }}
                   {...api.getTableProps()}
                 />
               </TabPane>

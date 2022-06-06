@@ -3,6 +3,7 @@ import { QueryBodyType } from "@bluelibs/x-ui";
 import { Doctor } from "@bundles/UIAppBundle/collections";
 import { Fragment } from "react";
 import { DoctorList as BaseDoctorList } from "./DoctorList.base";
+import * as Ant from "antd";
 
 @Service({ transient: true })
 export class DoctorList extends BaseDoctorList {
@@ -55,13 +56,14 @@ export class DoctorList extends BaseDoctorList {
       key: "management.doctors.fields.fullName",
       dataIndex: ["fullName"],
       sorter: true,
+      width:300,
       render: (record, modal) => {
         console.log(modal);
         return (
           <Fragment>
             <h4>FullName:{modal.fullName} </h4>
-            <h4>Phone: {modal.phone}</h4>
-            <h4>Create At: {new Date(modal.createdAt).toLocaleDateString()}</h4>
+            <h4>Phone:  <Ant.Tag color={"cyan"}>{modal.phone}</Ant.Tag></h4>
+            <h4>Create At: <Ant.Tag color={"green"}>{new Date(modal.createdAt).toLocaleDateString()}</Ant.Tag> </h4>
           </Fragment>
         );
       },
