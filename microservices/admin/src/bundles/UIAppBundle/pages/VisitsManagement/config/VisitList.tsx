@@ -11,6 +11,10 @@ export class VisitList extends BaseVisitList {
     super.build();
     if (process.env.MODE != "advanced") {
       this.remove("rotation");
+    }else {
+      this.update("rotation", {
+        responsive : ["sm"]
+      })
     }
     this.update("createdAt", {
       responsive: ["sm"]
@@ -42,9 +46,7 @@ export class VisitList extends BaseVisitList {
     this.update("doctor", {
       responsive : ["sm"]
     })
-    this.update("rotation", {
-      responsive : ["sm"]
-    })
+   
     this.add({
       id: "fullNameOne",
       title: "Information's",
