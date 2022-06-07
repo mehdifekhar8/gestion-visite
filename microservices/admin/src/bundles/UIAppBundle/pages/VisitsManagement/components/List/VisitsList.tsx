@@ -63,11 +63,11 @@ export function VisitsList() {
                 const value = (e.target as HTMLInputElement).value;
                 api.setFilters({
                   // Customise your search filters!
-                  doctor:{_id: "628cf54ef3504210345cecea"}
+                  doctor: { _id: "628cf54ef3504210345cecea" },
                 });
               }}
             />
-            <Ant.Table {...api.getTableProps()} />
+            <Ant.Table {...api.getTableProps()} scroll={{ x: 400 }} />
           </div>
         </Provider>
       </Ant.Layout.Content>

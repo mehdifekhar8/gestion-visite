@@ -14,6 +14,7 @@ import { Service } from "@bluelibs/core";
 import * as Ant from "antd";
 import { features } from "../../config/features";
 import { VisitList } from "../../config/VisitList";
+import useWindowDimensions from "@bundles/UIAppBundle/components/ViewPort/ViewPort";
 
 export class VisitsAntTableSmart extends AntTableSmart<Visit> {
   collectionClass = VisitsCollection;
@@ -30,11 +31,12 @@ export class VisitsAntTableSmart extends AntTableSmart<Visit> {
   }
 
   getActionsColumn(): ColumnType<Visit> {
+    const { height, width } = useWindowDimensions();
     return {
       title: this.i18n.t("generics.list_actions"),
       key: "actions",
-      fixed: "right",
-      width: 180,
+      fixed:  width > 900 ? "right" : false,
+      width: 100,
       render: (_, model) => {
         return this.generateActions(model, {
           label: this.i18n.t("generics.list_actions"),
